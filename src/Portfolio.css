@@ -42,24 +42,53 @@ body {
 
 .portfolio {
     position: relative;
+    background: #fafafa;
+    /* Бежевый фон */
 }
 
-/* Dotted Lines Background */
 .portfolio::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
+
     background-image:
-        linear-gradient(0deg, transparent 24%, rgba(37, 150, 190, 0.3) 25%, rgba(37, 150, 190, 0.3) 26%, transparent 27%, transparent 74%, rgba(37, 150, 190, 0.3) 75%, rgba(37, 150, 190, 0.3) 76%, transparent 77%, transparent),
-        linear-gradient(90deg, transparent 24%, rgba(37, 150, 190, 0.3) 25%, rgba(37, 150, 190, 0.3) 26%, transparent 27%, transparent 74%, rgba(37, 150, 190, 0.3) 75%, rgba(37, 150, 190, 0.3) 76%, transparent 77%, transparent);
-    background-size: 100px 100px;
-    z-index: 0;
+        repeating-linear-gradient(0deg,
+            rgba(140, 140, 140, 0.6) 0px,
+            rgba(140, 140, 140, 0.6) 1px,
+            transparent 1px,
+            transparent 4px),
+        repeating-linear-gradient(0deg,
+            rgba(140, 140, 140, 0.6) 0px,
+            rgba(140, 140, 140, 0.6) 1px,
+            transparent 1px,
+            transparent 4px),
+        repeating-linear-gradient(0deg,
+            rgba(140, 140, 140, 0.6) 0px,
+            rgba(140, 140, 140, 0.6) 1px,
+            transparent 1px,
+            transparent 4px),
+        repeating-linear-gradient(0deg,
+            rgba(140, 140, 140, 0.6) 0px,
+            rgba(140, 140, 140, 0.6) 1px,
+            transparent 1px,
+            transparent 4px);
+
+    background-position:
+        13.5% 0,
+        /* левая линия */
+        calc(13.5% + 73% / 3) 0,
+        /* первая центральная */
+        calc(13.5% + 2 * 73% / 3) 0,
+        /* вторая центральная */
+        calc(100% - 13.5%) 0;
+    /* правая линия */
+    background-size: 1px 100%, 1px 100%, 1px 100%, 1px 100%;
+    background-repeat: repeat-y;
+
     pointer-events: none;
-    opacity: 0.5;
+    z-index: 1;
 }
+
 
 /* Navigation */
 .nav {
@@ -126,7 +155,7 @@ body {
 .menu-icon {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
     cursor: pointer;
 }
 
