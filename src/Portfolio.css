@@ -25,6 +25,12 @@
     --font-clash-weight: 500;
     --font-clash-line-height: 1.2;
     --font-clash-color: rgb(128, 128, 128);
+
+    /* Grid line positions */
+    --grid-line-1: 13.5%;
+    --grid-line-2: calc(13.5% + 73% / 3);
+    --grid-line-3: calc(13.5% + 2 * 73% / 3);
+    --grid-line-4: 86.5%;
 }
 
 * {
@@ -43,9 +49,9 @@ body {
 .portfolio {
     position: relative;
     background: #fafafa;
-    /* Бежевый фон */
 }
 
+/* 🔥 ВЕРТИКАЛЬНЫЕ ЛИНИИ СЕТКИ */
 .portfolio::before {
     content: '';
     position: fixed;
@@ -74,14 +80,10 @@ body {
             transparent 4px);
 
     background-position:
-        13.5% 0,
-        /* левая линия */
-        calc(13.5% + 73% / 3) 0,
-        /* первая центральная */
-        calc(13.5% + 2 * 73% / 3) 0,
-        /* вторая центральная */
-        calc(100% - 13.5%) 0;
-    /* правая линия */
+        var(--grid-line-1) 0,
+        var(--grid-line-2) 0,
+        var(--grid-line-3) 0,
+        var(--grid-line-4) 0;
     background-size: 1px 100%, 1px 100%, 1px 100%, 1px 100%;
     background-repeat: repeat-y;
 
@@ -90,14 +92,16 @@ body {
 }
 
 
-/* Navigation */
+/* ========================================
+   🔥 NAVIGATION - GRID ALIGNED
+   ======================================== */
 .nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 2rem 5%;
+    padding: 2rem 0;
 }
 
 .nav::before {
@@ -115,17 +119,23 @@ body {
     pointer-events: none;
 }
 
+/* 🔥 GRID LAYOUT для nav-content */
 .nav-content {
     position: relative;
     z-index: 1;
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
+    width: 100%;
+    display: grid;
+    grid-template-columns:
+        var(--grid-line-1) calc(73% / 3) calc(73% / 3) calc(73% / 3) var(--grid-line-1);
     align-items: center;
 }
 
+/* Logo привязан к первой линии */
 .logo {
+    grid-column: 2;
+    justify-self: start;
+    padding-left: 0.2rem;
+
     font-family: 'Clash Display', sans-serif;
     font-size: 32px;
     font-weight: 500;
@@ -139,27 +149,23 @@ body {
     transition: all 0.3s ease;
 }
 
-
 .logo:hover {
     transform: scale(1.02);
     filter: brightness(1.2);
 }
 
-.nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-}
-
-/* Menu Icon */
+/* Menu icon привязан к последней линии */
 .menu-icon {
+    grid-column: 4;
+    justify-self: end;
+    padding-right: 0.2rem;
+
     display: flex;
     flex-direction: column;
     gap: 20px;
     cursor: pointer;
 }
 
-/* линии */
 .menu-line {
     width: 96px;
     height: 2px;
@@ -167,7 +173,24 @@ body {
     transition: transform 0.35s cubic-bezier(.4, 0, .2, 1);
 }
 
-/* 🔥 hover-анимация */
+@media (max-width: 1024px) {
+    .menu-line {
+        width: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-line {
+        width: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-line {
+        width: 35px;
+    }
+}
+
 .menu-icon:hover .menu-line:first-child {
     transform: translateY(4px);
 }
@@ -176,6 +199,239 @@ body {
     transform: translateY(-4px);
 }
 
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+
+/* ========================================
+   🔥 TOP BAR - GRID ALIGNED
+   ======================================== */
+.top-bar {
+    font-family: "Clash Display", sans-serif;
+    position: absolute;
+    top: 150px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    pointer-events: none;
+}
+
+.top-bar-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns:
+        var(--grid-line-1) calc(73% / 3) calc(73% / 3) calc(73% / 3) var(--grid-line-1);
+    align-items: center;
+    pointer-events: auto;
+    gap: 0.2rem;
+}
+
+/* Время/дата на первой линии */
+.top-bar-group:nth-child(1) {
+    grid-column: 2;
+    justify-self: start;
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+/* Статус в центре */
+.top-bar-group:nth-child(2) {
+    grid-column: 3;
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Фото на последней линии */
+.top-bar-group:nth-child(3) {
+    grid-column: 4;
+    justify-self: end;
+    padding-right: 0.7rem;
+}
+
+.top-bar-text {
+    font-size: 1rem;
+    color: #1a1a1a;
+    font-weight: 400;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+/* Статус с точкой */
+.top-bar-status {
+    gap: 0.5rem;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #3cae62;
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+    animation: pulse 2s infinite;
+}
+
+.status-dot::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: rgba(22, 222, 79, 0.3);
+    border-radius: 50%;
+    animation: ripple 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Фото с графическими элементами */
+.profile-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile-bars {
+    display: flex;
+    gap: 8px;
+    /* расстояние между линиями */
+    position: absolute;
+    left: -70px;
+    top: 0;
+}
+
+/* общие стили для всех линий */
+.profile-bars .bar {
+    background: #1a1a1a;
+    height: 80px;
+}
+
+/* разные размеры */
+.bar1 {
+    width: 20px;
+
+}
+
+.bar2 {
+    width: 12px;
+
+}
+
+.bar3 {
+    width: 8px;
+
+}
+
+.bar4 {
+    width: 4px;
+
+}
+
+
+.profile-image {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive для top-bar */
+@media (max-width: 1024px) {
+    .top-bar-content {
+        grid-template-columns: 1fr 2fr 1fr;
+        padding: 0 5%;
+    }
+
+    .top-bar-group:nth-child(1) {
+        grid-column: 1;
+        padding-right: 1rem;
+    }
+
+    .top-bar-group:nth-child(2) {
+        grid-column: 2;
+    }
+
+    .top-bar-group:nth-child(3) {
+        grid-column: 3;
+        padding-left: 1rem;
+    }
+
+    .profile-bars {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        top: 100px;
+    }
+
+    .top-bar-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 5%;
+    }
+
+    .top-bar-group:nth-child(1),
+    .top-bar-group:nth-child(2),
+    .top-bar-group:nth-child(3) {
+        grid-column: 1;
+        justify-self: center;
+        padding: 0;
+    }
+
+    .top-bar-group:nth-child(1) {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .profile-container {
+        width: 60px;
+        height: 60px;
+    }
+
+    .profile-image {
+        width: 60px;
+        height: 60px;
+    }
+}
 
 .nav-link {
     font-weight: 500;
@@ -209,6 +465,16 @@ body {
     color: #2596be;
 }
 
+@media (max-width: 768px) {
+    .hero {
+        padding-top: calc(100px + 120px);
+        /* было 90px */
+        padding-left: 5%;
+        /* явно добавлен */
+        padding-right: 5%;
+    }
+}
+
 /* Hero Section */
 .hero {
     position: relative;
@@ -216,7 +482,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 5%;
+    padding-top: calc(150px + 120px);
+    /* navbar + topbar */
     overflow: hidden;
     background: #fafafa;
 }
@@ -247,9 +514,56 @@ body {
     }
 }
 
+.hero-title-container {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(1rem, 3vw, 2rem);
+    flex-wrap: nowrap;
+}
+
+.hero-title-gif {
+    width: clamp(80px, 15vw, 150px);
+
+    margin-top: 45px;
+    /* желаемая ширина */
+    height: auto;
+    /* сохраняем пропорции */
+    overflow: hidden;
+}
+
+.hero-title-gif img {
+    width: 100%;
+    /* масштабируем по контейнеру */
+    height: auto;
+
+}
+
+@media (max-width: 480px) {
+    .hero-title-container {
+        position: relative;
+        /* Для absolute позиционирования */
+    }
+
+    .hero-title-gif {
+        position: absolute;
+        left: 0px;
+        /* Котик слева от края */
+        bottom: 0;
+        z-index: 0;
+        /* Под текстом */
+    }
+
+    .hero-title {
+        z-index: 1;
+        /* Текст поверх котика */
+    }
+}
+
+
+
 .hero-title {
     font-family: 'Clash Display', sans-serif;
-    font-size: clamp(4rem, 15vw, 12rem);
+    font-size: clamp(5rem, 15vw, 9.5rem);
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 0.9;
@@ -257,11 +571,13 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 2rem;
+
+    margin-bottom: 10rem;
     animation: fadeInUp 1.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s backwards;
 }
 
 .hero-subtitle {
+    font-family: 'Clash Display', sans-serif;
     font-size: clamp(1.2rem, 2.5vw, 1.8rem);
     color: #808080;
     font-weight: 400;
@@ -281,6 +597,7 @@ body {
 
 .hero-description {
     font-size: 1.1rem;
+    font-family: 'Clash Display', sans-serif;
     color: #5a6c7d;
     line-height: 1.8;
     max-width: 600px;
@@ -317,6 +634,20 @@ body {
 
 .hero-cta:hover svg {
     transform: translateX(5px);
+}
+
+/* Планшеты */
+@media (max-width: 1024px) {
+    .hero {
+        padding-top: calc(120px + 110px);
+    }
+}
+
+/* Мобилки */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: calc(100px + 90px);
+    }
 }
 
 /* Section Styles */
@@ -796,8 +1127,6 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-
-    .hero-content,
     .about-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
@@ -809,6 +1138,24 @@ body {
 
     .nav-links {
         gap: 1.5rem;
+    }
+
+    /* Упрощаем grid на планшетах */
+    .nav-content {
+        grid-template-columns: 1fr auto;
+        padding: 0 5%;
+    }
+
+    .logo {
+        grid-column: 1;
+        justify-self: start;
+        padding-right: 0;
+    }
+
+    .menu-icon {
+        grid-column: 2;
+        justify-self: end;
+        padding-left: 0;
     }
 }
 
@@ -837,6 +1184,10 @@ body {
         flex-direction: column;
         align-items: stretch;
     }
+
+    .nav-content {
+        padding: 0 5%;
+    }
 }
 
 /* Scroll Animation Observer */
@@ -849,4 +1200,26 @@ body {
 .animate-on-scroll.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+.cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.08);
+    /* серый */
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease-out;
+    backdrop-filter: blur(2px);
+}
+
+@media (max-width: 768px) {
+    .cursor-follower {
+        display: none;
+    }
 }
