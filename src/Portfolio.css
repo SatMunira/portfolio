@@ -26,11 +26,12 @@
     --font-clash-line-height: 1.2;
     --font-clash-color: rgb(128, 128, 128);
 
-    /* Grid line positions */
-    --grid-line-1: 9.5%;
-    --grid-line-2: calc(9.5% + 82% / 3);
-    --grid-line-3: calc(9.5% + 2 * 82% / 3);
-    --grid-line-4: 91.5%;
+    --grid-line-1: 7%;
+    --grid-line-2: calc(7% + 86% / 4);
+    --grid-line-3: calc(7% + 2 * 86% / 4);
+    --grid-line-4: calc(7% + 3 * 86% / 4);
+    --grid-line-5: 93%;
+
 
 }
 
@@ -78,14 +79,21 @@ body {
             rgba(140, 140, 140, 0.6) 0px,
             rgba(140, 140, 140, 0.6) 1px,
             transparent 1px,
+            transparent 4px),
+        /* 🔥 ПЯТАЯ ЛИНИЯ */
+        repeating-linear-gradient(0deg,
+            rgba(140, 140, 140, 0.6) 0px,
+            rgba(140, 140, 140, 0.6) 1px,
+            transparent 1px,
             transparent 4px);
 
     background-position:
         var(--grid-line-1) 0,
         var(--grid-line-2) 0,
         var(--grid-line-3) 0,
-        var(--grid-line-4) 0;
-    background-size: 1px 100%, 1px 100%, 1px 100%, 1px 100%;
+        var(--grid-line-4) 0,
+        var(--grid-line-5) 0;
+    background-size: 1px 100%, 1px 100%, 1px 100%, 1px 100%, 1px 100%;
     background-repeat: repeat-y;
 
     pointer-events: none;
@@ -127,7 +135,7 @@ body {
     width: 100%;
     display: grid;
     grid-template-columns:
-        var(--grid-line-1) calc(82% / 3) calc(82% / 3) calc(82% / 3) var(--grid-line-1);
+        7% repeat(4, 1fr) 7%;
     align-items: center;
 }
 
@@ -157,7 +165,7 @@ body {
 
 /* Menu icon привязан к последней линии */
 .menu-icon {
-    grid-column: 4;
+    grid-column: 5;
     justify-self: end;
     padding-right: 0.2rem;
 
@@ -224,7 +232,7 @@ body {
     width: 100%;
     display: grid;
     grid-template-columns:
-        var(--grid-line-1) calc(82% / 3) calc(82% / 3) calc(82% / 3) var(--grid-line-1);
+        7% repeat(4, 1fr) 7%;
     align-items: center;
     pointer-events: auto;
     gap: 0.2rem;
@@ -241,21 +249,33 @@ body {
 
 }
 
-/* Статус в центре */
+
 .top-bar-group:nth-child(2) {
     grid-column: 3;
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    opacity: 0.75;
+}
+
+/* Статус в центре */
+.top-bar-group:nth-child(3) {
+    grid-column: 4;
     justify-self: start;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
+
 /* Фото на последней линии */
-.top-bar-group:nth-child(3) {
-    grid-column: 4;
+.top-bar-group:nth-child(4) {
+    grid-column: 5;
     justify-self: end;
-    padding-right: 0.7rem;
+
 }
+
 
 .top-bar-text {
     font-size: 1rem;
@@ -412,7 +432,9 @@ body {
 
     .top-bar-group:nth-child(1),
     .top-bar-group:nth-child(2),
-    .top-bar-group:nth-child(3) {
+    .top-bar-group:nth-child(3),
+    .top-bar-group:nth-child(4) {
+        /* добавь 4-й элемент */
         grid-column: 1;
         justify-self: center;
         padding: 0;
@@ -1268,6 +1290,19 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+/* Для мобилок уменьшаем высоту */
+@media (max-width: 768px) {
+    .project-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-image {
+        height: 200px;
+    }
 }
 
 .project-image::before {
