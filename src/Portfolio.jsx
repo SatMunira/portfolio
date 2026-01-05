@@ -161,6 +161,59 @@ export default function Portfolio() {
         </div>
       </section>
 
+      <section id="projects" className="section">
+        <div className="section-container">
+          {/* 🔥 НОВЫЙ ЗАГОЛОВОК */}
+          <div className="projects-header">
+            <div className="projects-header-left">
+              <div className="projects-span-container">
+                <div className="projects-graphic">
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                </div>
+                <div className="projects-span-text">
+                  <span className="bracket">(</span>
+                  <span className="text">PROJECTS</span>
+                  <span className="bracket">)</span>
+                </div>
+              </div>
+              <h2 className="projects-main-title">Freshly Cooked Designs</h2>
+            </div>
+            <div className="projects-header-right">
+              <p className="projects-description">
+                (Some of my <span className="highlight">best projects</span> highlighting everything I have to offer)
+              </p>
+            </div>
+          </div>
+
+          <div className="projects-grid">
+            {[
+              { title: 'E-Commerce Platform', desc: 'A full-stack e-commerce solution with modern UI, secure payment integration, and real-time inventory management. Built with React and Spring Boot.', tech: ['React', 'Spring Boot', 'PostgreSQL', 'Docker'] },
+              { title: 'Task Management App', desc: 'Collaborative task management tool with real-time updates, team workspaces, and productivity analytics. Features drag-and-drop interface.', tech: ['Next.js', 'Node.js', 'MongoDB', 'Socket.io'] },
+              { title: 'Weather Dashboard', desc: 'Real-time weather monitoring dashboard with interactive maps, forecasts, and historical data visualization. Clean and intuitive interface.', tech: ['React', 'TypeScript', 'D3.js', 'Weather API'] }
+            ].map((project, i) => (
+              <div key={i} className="project-card">
+                <div className="project-image"></div>
+                <div className="project-content">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.desc}</p>
+                  <div className="project-tech">
+                    {project.tech.map((t, j) => <span key={j} className="tech-badge">{t}</span>)}
+                  </div>
+                  <div className="project-links">
+                    <a href="#" className="project-link"><Github size={18} /> Code</a>
+                    <a href="#" className="project-link"><ExternalLink size={18} /> Live Demo</a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="about" className="section">
         <div className="section-container">
           <div className="section-header">
@@ -249,37 +302,6 @@ export default function Portfolio() {
                 <span className="skill-tag">Figma</span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects" className="section">
-        <div className="section-container">
-          <div className="section-header">
-            <h2 className="section-title">Featured Projects</h2>
-            <p className="section-subtitle">Some of my recent work that I'm proud of</p>
-          </div>
-          <div className="projects-grid">
-            {[
-              { title: 'E-Commerce Platform', desc: 'A full-stack e-commerce solution with modern UI, secure payment integration, and real-time inventory management. Built with React and Spring Boot.', tech: ['React', 'Spring Boot', 'PostgreSQL', 'Docker'] },
-              { title: 'Task Management App', desc: 'Collaborative task management tool with real-time updates, team workspaces, and productivity analytics. Features drag-and-drop interface.', tech: ['Next.js', 'Node.js', 'MongoDB', 'Socket.io'] },
-              { title: 'Weather Dashboard', desc: 'Real-time weather monitoring dashboard with interactive maps, forecasts, and historical data visualization. Clean and intuitive interface.', tech: ['React', 'TypeScript', 'D3.js', 'Weather API'] }
-            ].map((project, i) => (
-              <div key={i} className="project-card">
-                <div className="project-image"></div>
-                <div className="project-content">
-                  <h3 className="project-title">{project.title}</h3>
-                  <p className="project-description">{project.desc}</p>
-                  <div className="project-tech">
-                    {project.tech.map((t, j) => <span key={j} className="tech-badge">{t}</span>)}
-                  </div>
-                  <div className="project-links">
-                    <a href="#" className="project-link"><Github size={18} /> Code</a>
-                    <a href="#" className="project-link"><ExternalLink size={18} /> Live Demo</a>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

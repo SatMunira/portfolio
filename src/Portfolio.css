@@ -1223,3 +1223,278 @@ body {
         display: none;
     }
 }
+
+
+/* ========================================
+   🔥 PROJECTS SECTION - NEW HEADER
+   ======================================== */
+.projects-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 4rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.projects-header-left {
+    grid-column: 1 / span 2;
+}
+
+
+.projects-span-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.projects-graphic {
+    display: flex;
+    align-items: flex-end;
+}
+
+.projects-graphic .bar {
+    background: #1a1a1a;
+    height: 12px;
+    transition: height 0.3s ease;
+}
+
+/* индивидуальные отступы */
+.projects-graphic .bar:nth-child(1) {
+    width: 28px;
+    margin-right: 12px;
+}
+
+.projects-graphic .bar:nth-child(2) {
+    width: 16px;
+    margin-right: 8px;
+}
+
+.projects-graphic .bar:nth-child(3) {
+    width: 12px;
+    margin-right: 4px;
+}
+
+.projects-graphic .bar:nth-child(4) {
+    width: 8px;
+    margin-right: 2px;
+}
+
+.projects-graphic .bar:nth-child(5) {
+    width: 4px;
+    margin-right: 0;
+}
+
+
+.projects-span-container:hover .projects-graphic .bar {
+    height: 24px !important;
+}
+
+.projects-span-text {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.projects-span-text .bracket {
+    color: #ccc;
+}
+
+.projects-span-text .text {
+    color: #1a1a1a;
+}
+
+.projects-main-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1.1;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.projects-header-right {
+    grid-column: 3;
+    justify-self: end;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 0.5rem;
+}
+
+.projects-description {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #808080;
+    text-align: left;
+}
+
+.projects-description .highlight {
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2.5rem;
+}
+
+.project-card {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    animation: fadeInUp 0.8s ease-out;
+    animation-fill-mode: both;
+}
+
+.project-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.project-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.project-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+    height: 250px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card:nth-child(2) .project-image {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.project-card:nth-child(3) .project-image {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.project-image::before {
+    content: 'Project Image';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.project-content {
+    padding: 2rem;
+}
+
+.project-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.project-description {
+    color: #5a6c7d;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.tech-badge {
+    padding: 0.4rem 1rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #34495e;
+    font-weight: 500;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: #2596be;
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.project-link:hover {
+    background: #1a7a9e;
+    transform: translateX(5px);
+}
+
+@media (max-width: 1024px) {
+    .projects-header {
+        grid-template-columns: 1fr 2fr 1fr;
+        padding: 0 5%;
+    }
+
+    .projects-header-left {
+        grid-column: 1;
+    }
+
+    .projects-header-right {
+        grid-column: 3;
+        max-width: 100%;
+    }
+
+    .projects-main-title {
+        font-size: clamp(2rem, 6vw, 3rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-header {
+        grid-template-columns: 1fr;
+        padding: 0 5%;
+    }
+
+    .projects-header-left,
+    .projects-header-right {
+        grid-column: 1;
+        justify-self: start;
+    }
+
+    .projects-header-right {
+        padding-bottom: 0;
+    }
+
+    .projects-description {
+        font-size: 0.95rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
