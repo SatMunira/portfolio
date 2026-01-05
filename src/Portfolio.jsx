@@ -191,19 +191,63 @@ export default function Portfolio() {
 
           <div className="projects-grid">
             {[
-              { title: 'Uniflow', desc: 'UniFlow is a full-stack student productivity platform for managing schedules, tasks, projects, and study workflows.', tech: ['React', 'Typescript', 'Vite', 'FastAPI', 'Python'] },
-              { title: 'Task Management App', desc: 'Collaborative task management tool with real-time updates, team workspaces, and productivity analytics. Features drag-and-drop interface.', tech: ['Next.js', 'Node.js', 'MongoDB', 'Socket.io'] },
-              { title: 'Task Management App', desc: 'Collaborative task management tool with real-time updates, team workspaces, and productivity analytics. Features drag-and-drop interface.', tech: ['Next.js', 'Node.js', 'MongoDB', 'Socket.io'] },
-              { title: 'Weather Dashboard', desc: 'Real-time weather monitoring dashboard with interactive maps, forecasts, and historical data visualization. Clean and intuitive interface.', tech: ['React', 'TypeScript', 'D3.js', 'Weather API'] }
+              {
+                title: 'Uniflow',
+                desc: 'UniFlow is a full-stack student productivity platform for managing schedules, tasks, projects, and study workflows.',
+                github: 'https://github.com/SatMunira/uniflow'
+              },
+              {
+                title: 'Finance Analytics App',
+                desc: 'A modern profit and loss management system that visualizes financial performance through monthly trends, category insights, and net/gross calculations.',
+                github: 'https://github.com/SatMunira/guv-app'
+              },
+              {
+                title: 'Paperless',
+                desc: 'A paperless document management app focused on organizing, structuring, and accessing digital documents with clarity and ease.',
+                github: 'https://github.com/SatMunira/paperless_react'
+              },
+              {
+                title: 'Kafka',
+                desc: 'A modern dark-mode app that lets users discover new books, browse by genres, and organize their personal library effortlessly.',
+                github: 'https://github.com/SatMunira/Kafka-React'
+              }
             ].map((project, i) => (
               <div key={i} className="project-card">
-                <div className="project-image"></div>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-image-link"
+                  onMouseMove={(e) => {
+                    const badge = e.currentTarget.querySelector('.project-badge');
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    badge.style.transform = `translate(${x}px, ${y}px)`;
+                  }}
+                  onMouseEnter={(e) => {
+                    const badge = e.currentTarget.querySelector('.project-badge');
+                    badge.style.opacity = '1';
+                  }}
+                  onMouseLeave={(e) => {
+                    const badge = e.currentTarget.querySelector('.project-badge');
+                    badge.style.opacity = '0';
+                  }}
+                >
+                  <div className="project-image">
+                    <div className="project-badge">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                      <span>VIEW PROJECT</span>
+                    </div>
+                  </div>
+                </a>
                 <div className="project-content">
                   <h3 className="project-title">{project.title}</h3>
                   <p className="project-description">{project.desc}</p>
-                  <div className="project-tech">
-                    {project.tech.map((t, j) => <span key={j} className="tech-badge">{t}</span>)}
-                  </div>
+
                 </div>
               </div>
             ))}

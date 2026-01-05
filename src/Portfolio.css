@@ -1085,6 +1085,7 @@ body {
     transform: translateY(0);
 }
 
+/*
 .cursor-follower {
     position: fixed;
     top: 0;
@@ -1093,13 +1094,13 @@ body {
     height: 32px;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.08);
-    /* серый */
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
     transition: transform 0.15s ease-out;
     backdrop-filter: blur(2px);
-}
+} 
+*/
 
 @media (max-width: 768px) {
     .cursor-follower {
@@ -1253,14 +1254,75 @@ body {
     animation-delay: 0.4s;
 }
 
+.project-image-link {
+    display: block;
+    text-decoration: none;
+    cursor: none;
+}
+
 .project-image {
     height: 380px;
     position: relative;
     overflow: hidden;
-
+    cursor: none;
+    /* скрываем обычный курсор */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.project-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0);
+    transition: background 0.4s ease;
+    z-index: 1;
+}
+
+.project-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Clash Display', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 3;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.5);
+    /* темный фон вместо белого */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 50px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    /* тень для контраста */
+}
+
+.project-badge svg {
+    width: 20px;
+    height: 20px;
+}
+
+.project-card:hover .project-image::before {
+    background: rgba(255, 255, 255, 0.349);
+}
+
+.project-card:hover .project-image::after {
+    opacity: 1;
+}
+
+.project-card:hover .project-badge {
+    opacity: 1;
 }
 
 
@@ -1269,11 +1331,15 @@ body {
 }
 
 .project-card:nth-child(2) .project-image {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background-image: url("./assets//img/project-guv.png");
 }
 
 .project-card:nth-child(3) .project-image {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background-image: url("./assets//img/paperless.png");
+}
+
+.project-card:nth-child(4) .project-image {
+    background-image: url("./assets//img/kafka.png");
 }
 
 .project-content {
