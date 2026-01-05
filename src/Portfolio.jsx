@@ -193,6 +193,7 @@ export default function Portfolio() {
             {[
               { title: 'E-Commerce Platform', desc: 'A full-stack e-commerce solution with modern UI, secure payment integration, and real-time inventory management. Built with React and Spring Boot.', tech: ['React', 'Spring Boot', 'PostgreSQL', 'Docker'] },
               { title: 'Task Management App', desc: 'Collaborative task management tool with real-time updates, team workspaces, and productivity analytics. Features drag-and-drop interface.', tech: ['Next.js', 'Node.js', 'MongoDB', 'Socket.io'] },
+              { title: 'Task Management App', desc: 'Collaborative task management tool with real-time updates, team workspaces, and productivity analytics. Features drag-and-drop interface.', tech: ['Next.js', 'Node.js', 'MongoDB', 'Socket.io'] },
               { title: 'Weather Dashboard', desc: 'Real-time weather monitoring dashboard with interactive maps, forecasts, and historical data visualization. Clean and intuitive interface.', tech: ['React', 'TypeScript', 'D3.js', 'Weather API'] }
             ].map((project, i) => (
               <div key={i} className="project-card">
@@ -202,10 +203,6 @@ export default function Portfolio() {
                   <p className="project-description">{project.desc}</p>
                   <div className="project-tech">
                     {project.tech.map((t, j) => <span key={j} className="tech-badge">{t}</span>)}
-                  </div>
-                  <div className="project-links">
-                    <a href="#" className="project-link"><Github size={18} /> Code</a>
-                    <a href="#" className="project-link"><ExternalLink size={18} /> Live Demo</a>
                   </div>
                 </div>
               </div>
