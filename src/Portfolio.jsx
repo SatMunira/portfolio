@@ -191,7 +191,7 @@ export default function Portfolio() {
 
           <div className="projects-grid">
             {[
-              { title: 'E-Commerce Platform', desc: 'A full-stack e-commerce solution with modern UI, secure payment integration, and real-time inventory management. Built with React and Spring Boot.', tech: ['React', 'Spring Boot', 'PostgreSQL', 'Docker'] },
+              { title: 'Uniflow', desc: 'UniFlow is a full-stack student productivity platform for managing schedules, tasks, projects, and study workflows.', tech: ['React', 'Typescript', 'Vite', 'FastAPI', 'Python'] },
               { title: 'Task Management App', desc: 'Collaborative task management tool with real-time updates, team workspaces, and productivity analytics. Features drag-and-drop interface.', tech: ['Next.js', 'Node.js', 'MongoDB', 'Socket.io'] },
               { title: 'Task Management App', desc: 'Collaborative task management tool with real-time updates, team workspaces, and productivity analytics. Features drag-and-drop interface.', tech: ['Next.js', 'Node.js', 'MongoDB', 'Socket.io'] },
               { title: 'Weather Dashboard', desc: 'Real-time weather monitoring dashboard with interactive maps, forecasts, and historical data visualization. Clean and intuitive interface.', tech: ['React', 'TypeScript', 'D3.js', 'Weather API'] }
