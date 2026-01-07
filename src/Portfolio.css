@@ -1731,6 +1731,19 @@ body {
     color: #d0d0d0;
 }
 
+.about-content-wrapper::after {
+    content: '';
+    grid-column: 2 / 6;
+    grid-row: 2;
+    height: 1px;
+    background-image: repeating-linear-gradient(90deg,
+            rgba(140, 140, 140, 0.6) 0px,
+            rgba(140, 140, 140, 0.6) 1px,
+            transparent 1px,
+            transparent 4px);
+    margin-top: 6rem;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     /* ... остальное */
@@ -1758,5 +1771,221 @@ body {
 @media (max-width: 768px) {
     .about-stats {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   🔥 TESTIMONIALS SECTION
+   ======================================== */
+.testimonials-section {
+    background: #1a1a1a;
+    /* высокая секция для скролла */
+    position: relative;
+    padding: 0;
+    z-index: 2;
+}
+
+.testimonials-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-top: 18rem;
+}
+
+/* 🔥 ЗАГОЛОВОК С // TESTIMONIALS // */
+.testimonials-header {
+    position: relative;
+    padding: 2rem 7%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 44rem;
+}
+
+.testimonials-header-slash {
+    font-family: 'Clash Display', sans-serif;
+    color: #494949;
+    font-size: 2rem;
+}
+
+.testimonials-header-title {
+    font-family: 'Clash Display', sans-serif;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.testimonials-subtitle {
+    text-align: center;
+    color: #fff;
+    font-family: 'Clash Display', sans-serif;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+}
+
+/* 🔥 STICKY КРУГ - ОСТАЁТСЯ НА МЕСТЕ */
+.testimonials-circle-wrapper {
+    position: sticky;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    pointer-events: none;
+    /* не блокирует клики */
+}
+
+.testimonials-circle {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Вращающийся текст */
+.rotating-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Кавычки в центре */
+.quote-marks {
+    position: absolute;
+    display: flex;
+    font-family: 'Georgia', serif;
+    font-size: 24rem;
+    color: #fff;
+    line-height: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -85%);
+}
+
+/* 🔥 TESTIMONIALS КОНТЕНТ - СКРОЛЛИТСЯ ПОД КРУГОМ */
+.testimonials-content {
+    position: relative;
+    padding: 0 0 20vh;
+    /* начинается после первого экрана */
+    display: flex;
+    flex-direction: column;
+    gap: 20vh;
+    /* большие промежутки между карточками */
+    z-index: 1;
+}
+
+.testimonial-card {
+    max-width: 550px;
+    background: rgba(63, 63, 63, 0.25);
+    backdrop-filter: blur(36px);
+    -webkit-backdrop-filter: blur(36px);
+    padding: 3rem;
+    border-radius: 20px;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.8s ease;
+    pointer-events: auto;
+}
+
+.testimonial-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Позиционирование справа/слева */
+.testimonial-right {
+    margin-left: auto;
+    margin-right: 10%;
+}
+
+.testimonial-left {
+    margin-left: 10%;
+    margin-right: auto;
+}
+
+.testimonial-text {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    margin-bottom: 2.5rem;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.author-name {
+    font-family: 'Clash Display', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.author-company {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 0.75rem;
+    color: #808080;
+}
+
+.author-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .testimonials-circle {
+        width: 200px;
+        height: 200px;
+    }
+
+    .quote-marks {
+        font-size: 4rem;
+    }
+
+    .testimonial-right,
+    .testimonial-left {
+        margin-left: 5%;
+        margin-right: 5%;
+        max-width: 90%;
+    }
+
+    .testimonial-text {
+        font-size: 1rem;
     }
 }

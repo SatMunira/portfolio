@@ -8,6 +8,27 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
   const [time, setTime] = useState(new Date());
 
+  // Testimonials scroll animation
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const cards = document.querySelectorAll('.testimonial-card');
+    cards.forEach(card => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
   // Анимация счётчика статистики при скролле
   useEffect(() => {
     const animateValue = (valueElement, start, end, duration) => {
@@ -405,6 +426,81 @@ export default function Portfolio() {
 
             <div className="about-image-column">
               <img src="src/assets/img/moe_ebalo2.jpg" alt="Munira Satanova" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" className="testimonials-section">
+        {/* Заголовок */}
+        <div className="testimonials-header">
+          <span className="testimonials-header-slash">//</span>
+          <h2 className="testimonials-header-title">TESTIMONIALS</h2>
+          <span className="testimonials-header-slash">//</span>
+        </div>
+        <p className="testimonials-subtitle">(© all bragging rights reserved by me)</p>
+
+        <div className="testimonials-container">
+          {/* 🔥 Sticky круг - остаётся в центре */}
+          <div className="testimonials-circle-wrapper">
+            <div className="testimonials-circle">
+              <svg className="rotating-text" viewBox="0 0 200 200">
+                <path
+                  id="circlePath"
+                  d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"
+                  fill="none"
+                />
+                <text fontSize="12" fill="#fff" letterSpacing="7.5">
+                  <textPath href="#circlePath">
+                    TESTIMONIAL - SEASONED WITH LOVE -
+                  </textPath>
+                </text>
+              </svg>
+
+              <div className="quote-marks">
+                <span style={{ fontWeight: 700 }}>,,</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Testimonials - скроллятся под кругом */}
+          <div className="testimonials-content">
+            <div className="testimonial-card testimonial-right">
+              <p className="testimonial-text">
+                Munira was a pleasure to work with at Siemens. Her frontend skills were invaluable to our team during her 6-month period with us. I recommend Munira for any frontend project and wish her all the best.
+              </p>
+              <div className="testimonial-author">
+                <div className="author-info">
+                  <span className="author-name">Alexis Delauney</span>
+                  <span className="author-company">Siemens</span>
+                </div>
+                <img src="src/assets/img/siemens-logo.png" alt="Siemens" className="author-logo" />
+              </div>
+            </div>
+
+            <div className="testimonial-card testimonial-left">
+              <p className="testimonial-text">
+                Munira and I worked on the same team on a project for a few months. Undoubtedly, she has amazing skills. She understands the requirements and has ideas to make the outcome better.
+              </p>
+              <div className="testimonial-author">
+                <div className="author-info">
+                  <span className="author-name">Adelya Musaeva</span>
+                  <span className="author-company">BOSCH</span>
+                </div>
+                <img src="src/assets/img/bosch-logo.png" alt="Bosch" className="author-logo" />
+              </div>
+            </div>
+
+            <div className="testimonial-card testimonial-right">
+              <p className="testimonial-text">
+                Munira is quick to learn and incredibly responsive. I worked with her in a team, and I can confidently say she never lets anyone down - she delivers on time, every time. Communicating and collaborating with her is easy, and she brings both skill and reliability to any project. </p>
+              <div className="testimonial-author">
+                <div className="author-info">
+                  <span className="author-name">Azilia Adylgazieva</span>
+                  <span className="author-company">Deutsche Telekom</span>
+                </div>
+                <img src="src/assets/img/dtelekom.png" alt="Deutsche Telekom" className="author-logo" />
+              </div>
             </div>
           </div>
         </div>
