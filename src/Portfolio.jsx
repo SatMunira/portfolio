@@ -8,6 +8,83 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
   const [time, setTime] = useState(new Date());
 
+  // Анимация счётчика статистики при скролле
+  useEffect(() => {
+    const animateValue = (valueElement, start, end, duration) => {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const current = Math.floor(progress * (end - start) + start);
+
+        // 🔥 Обновляем только текст числа, не трогая .stat-unit
+        const textNode = Array.from(valueElement.childNodes).find(node => node.nodeType === 3);
+        if (textNode) {
+          textNode.textContent = current;
+        } else {
+          // Если текстового узла нет, создаём
+          const unit = valueElement.querySelector('.stat-unit');
+          valueElement.textContent = current;
+          if (unit) valueElement.appendChild(unit);
+        }
+
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const statItems = entry.target.querySelectorAll('.stat-item');
+
+          if (entry.isIntersecting) {
+            // 🔥 Появляется - запускаем анимацию
+            entry.target.classList.add('animated');
+
+            // Code Enthusiast: 0 → 100%
+            const value1 = statItems[0]?.querySelector('.stat-value');
+            if (value1) animateValue(value1, 0, 100, 2000);
+
+            // Projects Completed: 0 → 15+
+            const value2 = statItems[1]?.querySelector('.stat-value');
+            if (value2) animateValue(value2, 0, 15, 2000);
+
+            // Learning Mode: 0 → 110%
+            const value3 = statItems[2]?.querySelector('.stat-value');
+            if (value3) animateValue(value3, 0, 110, 2000);
+          } else {
+            // 🔥 Уходит - сбрасываем
+            entry.target.classList.remove('animated');
+
+            // Сбрасываем значения обратно, сохраняя .stat-unit
+            statItems.forEach((item, index) => {
+              const valueEl = item.querySelector('.stat-value');
+              if (valueEl) {
+                const unit = valueEl.querySelector('.stat-unit');
+                const textNode = Array.from(valueEl.childNodes).find(node => node.nodeType === 3);
+                if (textNode) {
+                  textNode.textContent = '0';
+                } else {
+                  valueEl.textContent = '0';
+                  if (unit) valueEl.appendChild(unit);
+                }
+              }
+            });
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) observer.observe(aboutSection);
+
+    return () => observer.disconnect();
+  }, []);
+
   // 🔥 Lenis smooth scroll + blur эффект (ОБЪЕДИНЕНО)
   useEffect(() => {
     const lenis = new Lenis({
@@ -254,6 +331,81 @@ export default function Portfolio() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className="section">
+        <div className="section-container">
+          {/* ТОЛЬКО ЗАГОЛОВОК */}
+          <div className="about-header">
+            <div className="about-header-left">
+              <div className="about-span-container">
+                <div className="about-graphic">
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                </div>
+                <div className="about-span-text">
+                  <span className="bracket">(</span>
+                  <span className="text">ABOUT ME</span>
+                  <span className="bracket">)</span>
+                </div>
+              </div>
+              <h2 className="about-main-title">Fullstack Developer.<br />Tech Enthusiast.</h2>
+            </div>
+
+            <div className="about-header-right">
+              <p className="about-description">
+                Building digital experiences that feel as smooth as your favorite workflow.
+              </p>
+            </div>
+          </div>
+
+          {/* КОНТЕНТ ОТДЕЛЬНО */}
+          <div className="about-content-wrapper">
+            <div className="about-text-column">
+              <p className="about-text">
+                Hey, I’m Munira. I’m someone who finds satisfaction in{" "}
+                <span style={{ color: "#000" }}>things being finished</span> — not rushed, not abandoned halfway, but calmly brought to a point where they finally feel complete.
+              </p>
+
+              <p className="about-text">
+                I tend to notice{" "}
+                <span style={{ color: "#000" }}>details others overlook</span>. When something is almost right, I feel it immediately — and I can’t leave it there. A small adjustment, another pass, a quiet refinement, until everything{" "}
+                <span style={{ color: "#000" }}>settles into place</span>.
+              </p>
+
+              <p className="about-text">
+                When I’m not focused on a task, I usually slow things down:{" "}
+                <span style={{ color: "#000" }}>a cup of cappuccino</span>, good music, observing how things connect — visually, structurally, intuitively. I care about{" "}
+                <span style={{ color: "#000" }}>harmony, character, and intention</span>.
+              </p>
+
+
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Music Lover</div>
+              <div className="stat-value">110<span className="stat-unit">%</span></div>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Cups of Cappuccino / Week</div>
+              <div className="stat-value">15<span className="stat-unit">+</span></div>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Traveller Enthusiast</div>
+              <div className="stat-value">100<span className="stat-unit">%</span></div>
+            </div>
+
+
+            <div className="about-image-column">
+              <img src="src/assets/img/moe_ebalo2.jpg" alt="Munira Satanova" />
+            </div>
           </div>
         </div>
       </section>
