@@ -587,7 +587,8 @@ export default function Portfolio() {
                 </div>
               </div>
               <div className="card-image">
-                <img src="/path/to/compass.svg" alt="UX Research" />
+                <img src="https://framerusercontent.com/images/9pSg9VbHyOzgvjgKg8ZxafAC9Y.svg?width=157&height=192" alt="Compass" className="compass-base" />
+                <img src="https://framerusercontent.com/images/ux3d5Re26BvQ1hMY6HFoUzaWtHA.svg?width=18&height=100" alt="Arrow" className="compass-arrow" />
               </div>
               <p className="card-description">
                 Research is my "nakshe ka compass" decoding user behavior to craft experiences that resonates.
@@ -604,7 +605,8 @@ export default function Portfolio() {
                 </div>
               </div>
               <div className="card-image">
-                <img src="/path/to/palette.svg" alt="Visual Design" />
+                <img src="https://framerusercontent.com/images/FKdtn2NzI19PvdqikGNTBvGO8M.svg?width=218&height=164" alt="Palette" className="palette-base" />
+                <img src="https://framerusercontent.com/images/nJnhkgaAyHW1ZSoDX71zT6bWucA.svg?width=30&height=44" alt="Brush" className="palette-brush" />
               </div>
               <p className="card-description">
                 Visual design is my "canvas ka magic", making every screen a feast for the eyes.
@@ -621,86 +623,12 @@ export default function Portfolio() {
                 </div>
               </div>
               <div className="card-image">
-                <img src="/path/to/service.svg" alt="Service Design" />
+                <img src="https://framerusercontent.com/images/qijKgqD5sm0TZqlD52en6tHZeQ.svg?width=171&height=207" alt="Stars" className="rocket-stars" />
+                <img src="https://framerusercontent.com/images/Q7x7MuONdp0b9SNGrEqqnmMw.svg?width=171&height=207" alt="Rocket" className="rocket-ship" />
               </div>
               <p className="card-description">
                 Service design is my rocket, designing holistic experiences that work smoothly behind the scenes.
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" className="section">
-        <div className="section-container">
-          {/* ТОЛЬКО ЗАГОЛОВОК */}
-          <div className="about-header">
-            <div className="about-header-left">
-              <div className="about-span-container">
-                <div className="about-graphic">
-                  <div className="bar"></div>
-                  <div className="bar"></div>
-                  <div className="bar"></div>
-                  <div className="bar"></div>
-                  <div className="bar"></div>
-                </div>
-                <div className="about-span-text">
-                  <span className="bracket">(</span>
-                  <span className="text">ABOUT ME</span>
-                  <span className="bracket">)</span>
-                </div>
-              </div>
-              <h2 className="about-main-title">Fullstack Developer.<br />Tech Enthusiast.</h2>
-            </div>
-
-            <div className="about-header-right">
-              <p className="about-description">
-                Building digital experiences that feel as smooth as your favorite workflow.
-              </p>
-            </div>
-          </div>
-
-          {/* КОНТЕНТ ОТДЕЛЬНО */}
-          <div className="about-content-wrapper">
-            <div className="about-text-column">
-              <p className="about-text">
-                Hey, I’m Munira. I’m someone who finds satisfaction in{" "}
-                <span style={{ color: "#000" }}>things being finished</span> — not rushed, not abandoned halfway, but calmly brought to a point where they finally feel complete.
-              </p>
-
-              <p className="about-text">
-                I tend to notice{" "}
-                <span style={{ color: "#000" }}>details others overlook</span>. When something is almost right, I feel it immediately — and I can’t leave it there. A small adjustment, another pass, a quiet refinement, until everything{" "}
-                <span style={{ color: "#000" }}>settles into place</span>.
-              </p>
-
-              <p className="about-text">
-                When I’m not focused on a task, I usually slow things down:{" "}
-                <span style={{ color: "#000" }}>a cup of cappuccino</span>, good music, observing how things connect — visually, structurally, intuitively. I care about{" "}
-                <span style={{ color: "#000" }}>harmony, character, and intention</span>.
-              </p>
-
-
-            </div>
-
-            <div className="stat-item">
-              <div className="stat-label">Music Lover</div>
-              <div className="stat-value">110<span className="stat-unit">%</span></div>
-            </div>
-
-            <div className="stat-item">
-              <div className="stat-label">Cups of Cappuccino / Week</div>
-              <div className="stat-value">15<span className="stat-unit">+</span></div>
-            </div>
-
-            <div className="stat-item">
-              <div className="stat-label">Traveller Enthusiast</div>
-              <div className="stat-value">100<span className="stat-unit">%</span></div>
-            </div>
-
-
-            <div className="about-image-column">
-              <img src="src/assets/img/moe_ebalo2.jpg" alt="Munira Satanova" />
             </div>
           </div>
         </div>
