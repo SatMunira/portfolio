@@ -8,6 +8,60 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
   const [time, setTime] = useState(new Date());
 
+  // Playground scroll animations
+  useEffect(() => {
+    const textWrapper = document.querySelector('.playground-text-wrapper');
+    const textLeft = document.querySelector('.playground-text-left');
+    const textRight = document.querySelector('.playground-text-right');
+    const cards = document.querySelectorAll('.playground-card');
+
+    // 🔥 Плавное раздвигание текста при скролле
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const playgroundSection = document.getElementById('playground');
+      if (!playgroundSection || !textWrapper) return;
+
+      const sectionTop = playgroundSection.offsetTop;
+      const scrollProgress = scrollY - sectionTop;
+
+      // 🔥 Настройки
+      const maxScroll = 500; // медленнее раздвигается
+      const progress = Math.min(Math.max(scrollProgress / maxScroll, 0), 1);
+
+      const maxGap = 16; // не слишком далеко
+      const currentGap = progress * maxGap;
+
+      // Применяем трансформацию
+      if (textLeft && textRight) {
+        textLeft.style.transform = `translateX(-${currentGap}vw)`;
+        textRight.style.transform = `translateX(${currentGap}vw)`;
+      }
+
+      // 🔥 УБРАЛИ класс .split - он вызывал дергание
+    };
+
+    // Observer для карточек
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.3,
+      rootMargin: '-100px'
+    });
+
+    cards.forEach(card => observer.observe(card));
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   // Testimonials scroll animation
   useEffect(() => {
     const observerOptions = {
@@ -501,6 +555,152 @@ export default function Portfolio() {
                 </div>
                 <img src="src/assets/img/dtelekom.png" alt="Deutsche Telekom" className="author-logo" />
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="playground" className="playground-section">
+        <div className="playground-container">
+          <p className="playground-subtitle">(My Playground)</p>
+          {/* Раздвигающийся текст */}
+          <div className="playground-text-wrapper">
+            <div className="playground-text-left">
+              <h2>Crafting digital</h2>
+              <h2 className="text-italic">that truly</h2>
+            </div>
+            <div className="playground-text-right">
+              <h2>experiences</h2>
+              <h2>delight</h2>
+            </div>
+          </div>
+
+          {/* Карточки */}
+          <div className="playground-cards">
+            <div className="playground-card">
+              <div className="card-header">
+                <h3>UX Research</h3>
+                <div className="card-dots">
+                  <span className="dot active"></span>
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                </div>
+              </div>
+              <div className="card-image">
+                <img src="/path/to/compass.svg" alt="UX Research" />
+              </div>
+              <p className="card-description">
+                Research is my "nakshe ka compass" decoding user behavior to craft experiences that resonates.
+              </p>
+            </div>
+
+            <div className="playground-card">
+              <div className="card-header">
+                <h3>Visual Design<br />& Branding</h3>
+                <div className="card-dots">
+                  <span className="dot active"></span>
+                  <span className="dot active"></span>
+                  <span className="dot"></span>
+                </div>
+              </div>
+              <div className="card-image">
+                <img src="/path/to/palette.svg" alt="Visual Design" />
+              </div>
+              <p className="card-description">
+                Visual design is my "canvas ka magic", making every screen a feast for the eyes.
+              </p>
+            </div>
+
+            <div className="playground-card">
+              <div className="card-header">
+                <h3>Service Design</h3>
+                <div className="card-dots">
+                  <span className="dot active"></span>
+                  <span className="dot active"></span>
+                  <span className="dot active"></span>
+                </div>
+              </div>
+              <div className="card-image">
+                <img src="/path/to/service.svg" alt="Service Design" />
+              </div>
+              <p className="card-description">
+                Service design is my rocket, designing holistic experiences that work smoothly behind the scenes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className="section">
+        <div className="section-container">
+          {/* ТОЛЬКО ЗАГОЛОВОК */}
+          <div className="about-header">
+            <div className="about-header-left">
+              <div className="about-span-container">
+                <div className="about-graphic">
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                </div>
+                <div className="about-span-text">
+                  <span className="bracket">(</span>
+                  <span className="text">ABOUT ME</span>
+                  <span className="bracket">)</span>
+                </div>
+              </div>
+              <h2 className="about-main-title">Fullstack Developer.<br />Tech Enthusiast.</h2>
+            </div>
+
+            <div className="about-header-right">
+              <p className="about-description">
+                Building digital experiences that feel as smooth as your favorite workflow.
+              </p>
+            </div>
+          </div>
+
+          {/* КОНТЕНТ ОТДЕЛЬНО */}
+          <div className="about-content-wrapper">
+            <div className="about-text-column">
+              <p className="about-text">
+                Hey, I’m Munira. I’m someone who finds satisfaction in{" "}
+                <span style={{ color: "#000" }}>things being finished</span> — not rushed, not abandoned halfway, but calmly brought to a point where they finally feel complete.
+              </p>
+
+              <p className="about-text">
+                I tend to notice{" "}
+                <span style={{ color: "#000" }}>details others overlook</span>. When something is almost right, I feel it immediately — and I can’t leave it there. A small adjustment, another pass, a quiet refinement, until everything{" "}
+                <span style={{ color: "#000" }}>settles into place</span>.
+              </p>
+
+              <p className="about-text">
+                When I’m not focused on a task, I usually slow things down:{" "}
+                <span style={{ color: "#000" }}>a cup of cappuccino</span>, good music, observing how things connect — visually, structurally, intuitively. I care about{" "}
+                <span style={{ color: "#000" }}>harmony, character, and intention</span>.
+              </p>
+
+
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Music Lover</div>
+              <div className="stat-value">110<span className="stat-unit">%</span></div>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Cups of Cappuccino / Week</div>
+              <div className="stat-value">15<span className="stat-unit">+</span></div>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Traveller Enthusiast</div>
+              <div className="stat-value">100<span className="stat-unit">%</span></div>
+            </div>
+
+
+            <div className="about-image-column">
+              <img src="src/assets/img/moe_ebalo2.jpg" alt="Munira Satanova" />
             </div>
           </div>
         </div>

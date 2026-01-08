@@ -1989,3 +1989,187 @@ body {
         font-size: 1rem;
     }
 }
+
+/* PLAYGROUND SECTION */
+.playground-section {
+    background: #fafafa;
+    padding: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.playground-container {
+    position: relative;
+    width: 100%;
+}
+
+.playground-subtitle {
+    font-family: 'Inter Display', sans-serif;
+    font-style: italic;
+    font-size: 1rem;
+    text-align: center;
+    color: #111212;
+    padding: 4rem 0;
+}
+
+/* 🔥 STICKY ТЕКСТ - РАЗДВИГАЕТСЯ И ОСТАЁТСЯ НА МЕСТЕ */
+.playground-text-wrapper {
+    position: sticky;
+    top: 20%;
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    align-items: center;
+    min-height: 20vh;
+    z-index: 1;
+    pointer-events: none;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2px 200px 0;
+}
+
+.playground-text-left,
+.playground-text-right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 400px;
+    /* 🔥 фиксированная ширина */
+    flex-shrink: 0;
+    /* 🔥 не сжимать */
+    will-change: transform;
+}
+
+.playground-text-left {
+    align-items: flex-end;
+    /* правое выравнивание */
+}
+
+.playground-text-right {
+    align-items: flex-start;
+    /* левое выравнивание */
+}
+
+.playground-text-left h2,
+.playground-text-right h2 {
+    font-family: "Clash Display", sans-serif;
+    font-size: 48px;
+    /* фиксированный размер */
+    font-weight: 500;
+    line-height: 1em;
+    /* 🔥 плотный line-height */
+    letter-spacing: 0em;
+    color: #1a1a1a;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.playground-text-left h2 {
+    text-align: right;
+}
+
+.playground-text-right h2 {
+    text-align: left;
+}
+
+.text-italic {
+    font-style: italic;
+    color: #808080;
+}
+
+/* 🔥 КАРТОЧКИ - СКРОЛЛЯТСЯ ПОД ТЕКСТОМ */
+.playground-cards {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10vh;
+    padding: 30vh 0 0;
+    /* начинается после первого экрана */
+    z-index: 2;
+}
+
+.playground-card {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.8s ease;
+    pointer-events: auto;
+}
+
+.playground-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.card-header h3 {
+    font-family: 'Geist', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0;
+}
+
+.card-dots {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: #e6e6e6;
+    border-radius: 2px;
+}
+
+.dot.active {
+    background: #000;
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.card-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.card-description {
+    font-family: 'Inter Display', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #808080;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .playground-text-wrapper {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .playground-text-left h2,
+    .playground-text-right h2 {
+        text-align: center;
+    }
+}
