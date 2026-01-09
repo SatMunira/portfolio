@@ -2283,10 +2283,176 @@ body {
 
     0%,
     100% {
-        transform: translate(-50%, -50%) translate(0, 0);
+        transform: translate(-48%, -50%) translate(0, 0);
     }
 
     50% {
         transform: translate(-50%, -50%) translate(20px, -20px);
     }
+}
+
+/* POTENTIAL SECTION */
+.potential-section {
+    background: #0d0d0d;
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    z-index: 2;
+}
+
+.potential-dots {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://framerusercontent.com/images/wGAHOWhVswEtWkOKTJN6s2CW0.svg?width=96&height=96');
+    background-size: 19px;
+    background-repeat: repeat;
+    opacity: 0.1;
+    mask: linear-gradient(rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.867) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+
+@keyframes moveOverlay {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+.potential-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 72px;
+    width: 100%;
+}
+
+/* Заголовок */
+.potential-title {
+    font-family: 'Space Grotesk', 'Space Grotesk Placeholder', sans-serif;
+    font-size: 118.5px;
+    font-weight: 600;
+    line-height: 0.8em;
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 0 48px;
+    width: 100%;
+    white-space: nowrap;
+}
+
+/* Спидометр */
+.speedometer-wrapper {
+    position: relative;
+    width: 900px;
+    /* 600 * 1.5 */
+    height: 900px;
+    /* 600 * 1.5 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+.speedometer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Градиентный круг */
+.speedometer-circle {
+    position: absolute;
+    width: 795px;
+    /* 530 * 1.5 */
+    height: 795px;
+    /* 530 * 1.5 */
+    border-radius: 50%;
+    background: conic-gradient(rgba(0, 0, 0, 0) 324deg, rgba(84, 84, 84, 0.4) 360deg);
+    mask: radial-gradient(50% 50%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 70%, rgb(0, 0, 0) 100%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+}
+
+/* Стрелка */
+.speedometer-pin {
+    position: absolute;
+    width: 6px;
+    /* 4 * 1.5 */
+    height: 400px;
+    /* 265 * 1.5 */
+    background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
+    top: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    transform: translate(-50%, -100%);
+    will-change: transform;
+    z-index: 2;
+}
+
+/* Деления */
+.speedometer-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    overflow: visible;
+    transform: translate(-50%, -50%);
+    mask:
+        linear-gradient(to bottom,
+            black 0%,
+            black 50%,
+            transparent 50%),
+        linear-gradient(90deg,
+            transparent 0%,
+            /* 🔥 слева fade-out */
+            black 15%,
+            black 85%,
+            transparent 100%
+            /* 🔥 справа fade-out */
+        );
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+}
+
+/* Основные деления - светлые */
+.line-main {
+    position: absolute;
+    width: 6px;
+    /* 4 * 1.5 */
+    height: 40px;
+    /* 30 * 1.5 */
+    background: #e6e6e6;
+    top: 30px;
+    /* 20 * 1.5 */
+    left: 50%;
+    transform-origin: center 441px;
+    /* 280 * 1.5 */
+}
+
+/* Второстепенные деления - темные */
+.line-secondary {
+    position: absolute;
+    width: 3px;
+    /* 2 * 1.5 */
+    height: 25px;
+    /* 20 * 1.5 */
+    background: #666;
+    top: 30px;
+    /* 20 * 1.5 */
+    left: 50%;
+    transform-origin: center 435px;
+    /* 270 * 1.5 */
 }

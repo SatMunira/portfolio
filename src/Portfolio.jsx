@@ -8,6 +8,40 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home');
   const [time, setTime] = useState(new Date());
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = document.getElementById('potential');
+      const circle = document.querySelector('.speedometer-circle');
+      const pin = document.querySelector('.speedometer-pin');
+
+      if (!section || !circle || !pin) return;
+
+      // Получаем позицию секции
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const scrollY = window.scrollY;
+
+      // Вычисляем прогресс скролла внутри секции (0 до 1)
+      const scrollProgress = (scrollY - sectionTop) / (sectionHeight / 2);
+      const progress = Math.min(Math.max(scrollProgress, 0), 1);
+
+      const startAngle = 0;
+      const endAngle = 90;
+      const currentAngle = startAngle + (progress * (endAngle - startAngle));
+
+      // Применяем вращение
+      circle.style.transform = `translate(-50%, -50%) rotate(${currentAngle}deg)`;
+      pin.style.transform = `translate(-50%, -100%) rotate(${currentAngle}deg)`;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // вызываем сразу
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   // Playground scroll animations
   useEffect(() => {
     const textWrapper = document.querySelector('.playground-text-wrapper');
@@ -629,6 +663,135 @@ export default function Portfolio() {
               <p className="card-description">
                 Service design is my rocket, designing holistic experiences that work smoothly behind the scenes.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="potential" className="potential-section">
+        <div className="potential-dots"></div>
+        <div className="potential-overlay"></div>
+
+        <div className="potential-container">
+          <h2 className="potential-title">WORKING TO FULL POTENTIAL</h2>
+
+          <div className="speedometer-wrapper">
+            <div className="speedometer">
+              {/* Градиентный круг */}
+              <div className="speedometer-circle"></div>
+
+              {/* Стрелка */}
+              <div className="speedometer-pin"></div>
+
+              {/* Деления - генерируем в JS */}
+              <div className="speedometer-lines">
+                {/* Основные деления (каждые 30°) */}
+                {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle) => (
+                  <div
+                    key={`main-${angle}`}
+                    className="line-main"
+                    style={{ transform: `translate(-50%, -50%) rotate(${angle}deg)` }}
+                  />
+                ))}
+
+                {/* Второстепенные деления (каждые 5°) */}
+                {Array.from({ length: 72 }, (_, i) => i * 5).filter(angle => angle % 30 !== 0).map((angle) => (
+                  <div
+                    key={`secondary-${angle}`}
+                    className="line-secondary"
+                    style={{ transform: `translate(-50%, -50%) rotate(${angle}deg)` }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="potential-description">
+            <p>Fueled by curiosity, I'm always accelerating toward better ideas, sharper designs, and deeper understanding.</p>
+            <p>The gauge never stays still.</p>
+          </div>
+
+          <a href="https://your-resume-link.pdf" className="resume-button" target="_blank" rel="noopener noreferrer">
+            <span>Resume</span>
+            <div className="arrow-container">
+              <svg className="arrow" viewBox="0 0 256 256" fill="currentColor">
+                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z" />
+              </svg>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section id="about" className="section">
+        <div className="section-container">
+          {/* ТОЛЬКО ЗАГОЛОВОК */}
+          <div className="about-header">
+            <div className="about-header-left">
+              <div className="about-span-container">
+                <div className="about-graphic">
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                </div>
+                <div className="about-span-text">
+                  <span className="bracket">(</span>
+                  <span className="text">ABOUT ME</span>
+                  <span className="bracket">)</span>
+                </div>
+              </div>
+              <h2 className="about-main-title">Fullstack Developer.<br />Tech Enthusiast.</h2>
+            </div>
+
+            <div className="about-header-right">
+              <p className="about-description">
+                Building digital experiences that feel as smooth as your favorite workflow.
+              </p>
+            </div>
+          </div>
+
+          {/* КОНТЕНТ ОТДЕЛЬНО */}
+          <div className="about-content-wrapper">
+            <div className="about-text-column">
+              <p className="about-text">
+                Hey, I’m Munira. I’m someone who finds satisfaction in{" "}
+                <span style={{ color: "#000" }}>things being finished</span> — not rushed, not abandoned halfway, but calmly brought to a point where they finally feel complete.
+              </p>
+
+              <p className="about-text">
+                I tend to notice{" "}
+                <span style={{ color: "#000" }}>details others overlook</span>. When something is almost right, I feel it immediately — and I can’t leave it there. A small adjustment, another pass, a quiet refinement, until everything{" "}
+                <span style={{ color: "#000" }}>settles into place</span>.
+              </p>
+
+              <p className="about-text">
+                When I’m not focused on a task, I usually slow things down:{" "}
+                <span style={{ color: "#000" }}>a cup of cappuccino</span>, good music, observing how things connect — visually, structurally, intuitively. I care about{" "}
+                <span style={{ color: "#000" }}>harmony, character, and intention</span>.
+              </p>
+
+
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Music Lover</div>
+              <div className="stat-value">110<span className="stat-unit">%</span></div>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Cups of Cappuccino / Week</div>
+              <div className="stat-value">15<span className="stat-unit">+</span></div>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Traveller Enthusiast</div>
+              <div className="stat-value">100<span className="stat-unit">%</span></div>
+            </div>
+
+
+            <div className="about-image-column">
+              <img src="src/assets/img/moe_ebalo2.jpg" alt="Munira Satanova" />
             </div>
           </div>
         </div>
