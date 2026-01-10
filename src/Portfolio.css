@@ -2302,8 +2302,8 @@ body {
     align-items: center;
     gap: 48px;
     z-index: 2;
-    clip-path: inset(0 0 350px 0);
     margin-top: 5rem;
+
 }
 
 .potential-dots {
@@ -2362,6 +2362,7 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    margin-bottom: -350px;
 }
 
 .speedometer {
@@ -2650,4 +2651,127 @@ body {
 /* Пауза на hover */
 .toolkit-carousel:hover .toolkit-track {
     animation-play-state: paused;
+}
+
+.contact-wrapper {
+    background: #fff;
+    /* 🔥 белый на всю ширину */
+    width: 100%;
+}
+
+.contact-cta {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 1488px;
+    min-height: 100px;
+    margin: 0 auto;
+    padding: 40px 0;
+    overflow: visible;
+    text-decoration: none;
+    cursor: pointer;
+    isolation: isolate;
+    z-index: 10;
+    background: transparent;
+}
+
+/* BACKGROUNDS */
+.contact-bg.base {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: -2;
+}
+
+/* TITLE */
+.contact-title {
+    position: relative;
+    z-index: 1;
+    font-family: 'Clash Display', sans-serif;
+    font-size: clamp(2rem, 4.5vw, 7rem);
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+/* Белая дымка при hover */
+.contact-title::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.contact-cta:hover .contact-title::after {
+    opacity: 1;
+}
+
+/* ARROWS OVERLAY */
+.contact-arrows-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.contact-cta:hover .contact-arrows-overlay {
+    opacity: 1;
+    /* 🔥 ПОЯВЛЯЮТСЯ при hover */
+}
+
+/* TRACK */
+.contact-arrows-track {
+    display: flex;
+    width: fit-content;
+    /* 🔥 важно */
+    animation: marqueeLoop 20s linear infinite;
+    will-change: transform;
+}
+
+.arrows-group {
+    display: flex;
+}
+
+/* ARROW - убираем gap, используем margin */
+.contact-arrow {
+    width: 36px;
+    height: 36px;
+    color: #1a1a1a;
+    flex-shrink: 0;
+    margin-right: 96px;
+    /* 🔥 вместо gap */
+}
+
+.arrows-group .contact-arrow:last-child {
+    margin-right: 96px;
+    /* 🔥 чтобы между группами тоже был отступ */
+}
+
+/* 🔥 ULTRA-SMOOTH анимация - ВПРАВО */
+@keyframes marqueeLoop {
+    from {
+        transform: translate3d(-50%, 0, 0);
+        /* 🔥 начинаем слева */
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+        /* 🔥 двигаемся вправо */
+    }
 }

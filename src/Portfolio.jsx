@@ -785,6 +785,52 @@ export default function Portfolio() {
         </div>
       </section>
 
+      <div className="contact-wrapper">
+        <a href="mailto:satanovamunira04@gmail.com" className="contact-cta">
+          {/* backgrounds */}
+          <div className="contact-bg base" />
+          <div className="contact-bg hover" />
+
+          {/* title */}
+          <h1 className="contact-title">
+            LET&apos;S COOK UP SOME CONVERSATION
+          </h1>
+
+          {/* arrows overlay */}
+          <div className="contact-arrows-overlay">
+            <div className="contact-arrows-track">
+              <div className="arrows-group">
+                {[...Array(15)].map((_, i) => (
+                  <svg
+                    key={`arrow-1-${i}`}
+                    className="contact-arrow"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                ))}
+              </div>
+              <div className="arrows-group">
+                {[...Array(15)].map((_, i) => (
+                  <svg
+                    key={`arrow-2-${i}`}
+                    className="contact-arrow"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
       <section id="about" className="section">
         <div className="section-container">
           {/* ТОЛЬКО ЗАГОЛОВОК */}
@@ -859,6 +905,7 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
+
 
       <div className="cursor-follower"></div>
     </div>
