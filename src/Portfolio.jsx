@@ -9,6 +9,19 @@ export default function Portfolio() {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
+    const track = document.querySelector('.toolkit-track');
+    const firstSet = track.children.length / 3; // количество иконок в одном наборе
+
+    // Вычисляем ширину одного набора
+    let setWidth = 0;
+    for (let i = 0; i < firstSet; i++) {
+      setWidth += track.children[i].offsetWidth + 61; // ширина + gap
+    }
+
+    track.style.setProperty('--scroll-distance', `-${setWidth}px`);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       const section = document.getElementById('potential');
       const circle = document.querySelector('.speedometer-circle');
@@ -594,6 +607,44 @@ export default function Portfolio() {
         </div>
       </section>
 
+      <section className="toolkit-section">
+        <h2 className="toolkit-title">My Developer Toolkit</h2>
+
+        <div className="toolkit-carousel">
+          <div className="toolkit-track">
+            {/* Копия 1 */}
+            <img src="src/assets/img/toolkit/react.svg" alt="React" />
+            <img src="src/assets/img/toolkit/typescript.svg" alt="TypeScript" />
+            <img src="src/assets/img/toolkit/javascript.svg" alt="JavaScript" />
+            <img src="src/assets/img/toolkit/git.svg" alt="Git" />
+            <img src="src/assets/img/toolkit/figma.svg" alt="Figma" />
+            <img src="src/assets/img/toolkit/postgresql.svg" alt="PostgreSQL" />
+            <img src="src/assets/img/toolkit/springboot.svg" alt="Spring Boot" />
+            <img src="src/assets/img/toolkit/docker.svg" alt="Docker" />
+
+            {/* Копия 2 */}
+            <img src="src/assets/img/toolkit/react.svg" alt="React" />
+            <img src="src/assets/img/toolkit/typescript.svg" alt="TypeScript" />
+            <img src="src/assets/img/toolkit/javascript.svg" alt="JavaScript" />
+            <img src="src/assets/img/toolkit/git.svg" alt="Git" />
+            <img src="src/assets/img/toolkit/figma.svg" alt="Figma" />
+            <img src="src/assets/img/toolkit/postgresql.svg" alt="PostgreSQL" />
+            <img src="src/assets/img/toolkit/springboot.svg" alt="Spring Boot" />
+            <img src="src/assets/img/toolkit/docker.svg" alt="Docker" />
+
+            {/* Копия 3 🔥 */}
+            <img src="src/assets/img/toolkit/react.svg" alt="React" />
+            <img src="src/assets/img/toolkit/typescript.svg" alt="TypeScript" />
+            <img src="src/assets/img/toolkit/javascript.svg" alt="JavaScript" />
+            <img src="src/assets/img/toolkit/git.svg" alt="Git" />
+            <img src="src/assets/img/toolkit/figma.svg" alt="Figma" />
+            <img src="src/assets/img/toolkit/postgresql.svg" alt="PostgreSQL" />
+            <img src="src/assets/img/toolkit/springboot.svg" alt="Spring Boot" />
+            <img src="src/assets/img/toolkit/docker.svg" alt="Docker" />
+          </div>
+        </div>
+      </section>
+
       <section id="playground" className="playground-section">
         <div className="playground-container">
           <p className="playground-subtitle">(My Playground)</p>
@@ -683,9 +734,8 @@ export default function Portfolio() {
               {/* Стрелка */}
               <div className="speedometer-pin"></div>
 
-              {/* Деления - генерируем в JS */}
+              {/* Деления */}
               <div className="speedometer-lines">
-                {/* Основные деления (каждые 30°) */}
                 {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle) => (
                   <div
                     key={`main-${angle}`}
@@ -694,7 +744,6 @@ export default function Portfolio() {
                   />
                 ))}
 
-                {/* Второстепенные деления (каждые 5°) */}
                 {Array.from({ length: 72 }, (_, i) => i * 5).filter(angle => angle % 30 !== 0).map((angle) => (
                   <div
                     key={`secondary-${angle}`}
@@ -703,22 +752,36 @@ export default function Portfolio() {
                   />
                 ))}
               </div>
+
+              {/* 🔥 Текст внутри спидометра */}
+              <div className="potential-description">
+                <p>Fueled by curiosity, I'm always accelerating toward better ideas, sharper designs, and deeper understanding.</p>
+                <p>The gauge never stays still.</p>
+              </div>
+
+              {/* 🔥 Кнопка внутри спидометра */}
+              <a href="https://drive.google.com/file/d/1Iwyl1CZlGXNkwSbFV7j6YMr2ZECAdHho/view?usp=sharing"
+                className="resume-button"
+                target="_blank"
+                rel="noopener">
+                <div className="resume-text">
+                  <p>Resume</p>
+                </div>
+                <div className="arrow-container">
+                  <div className="arrow-circle arrow-1">
+                    <svg viewBox="0 0 256 256" fill="currentColor">
+                      <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z" />
+                    </svg>
+                  </div>
+                  <div className="arrow-circle arrow-2">
+                    <svg viewBox="0 0 256 256" fill="currentColor">
+                      <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
-
-          <div className="potential-description">
-            <p>Fueled by curiosity, I'm always accelerating toward better ideas, sharper designs, and deeper understanding.</p>
-            <p>The gauge never stays still.</p>
-          </div>
-
-          <a href="https://your-resume-link.pdf" className="resume-button" target="_blank" rel="noopener noreferrer">
-            <span>Resume</span>
-            <div className="arrow-container">
-              <svg className="arrow" viewBox="0 0 256 256" fill="currentColor">
-                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z" />
-              </svg>
-            </div>
-          </a>
         </div>
       </section>
 
