@@ -2,6 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Mail, Github, Linkedin, ExternalLink, Briefcase, GraduationCap, Code, Database, Globe } from 'lucide-react';
 import './Portfolio.css';
 import Lenis from '@studio-freight/lenis';
+import muniraPhoto from './assets/img/moe_ebalo.jpg';
+import siemens from './assets/img/siemens-logo.png';
+import bosch from './assets/img/bosch-logo.png';
+import dtelekom from './assets/img/dtelekom.png';
+import reactLogo from './assets/img/toolkit/react.svg';
+import tsLogo from './assets/img/toolkit/typescript.svg';
+import jsLogo from './assets/img/toolkit/javascript.svg';
+import gitLogo from './assets/img/toolkit/git.svg';
+import figmaLogo from './assets/img/toolkit/figma.svg';
+import pgLogo from './assets/img/toolkit/postgresql.svg';
+import springLogo from './assets/img/toolkit/springboot.svg';
+import dockerLogo from './assets/img/toolkit/docker.svg';
+import munira2 from './assets/img/moe_ebalo2.jpg';
 
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
@@ -355,7 +368,7 @@ export default function Portfolio() {
                 <div className="bar bar4"></div>
               </div>
               <div className="profile-image">
-                <img src="src/assets/img/moe_ebalo.jpg" alt="Munira" />
+                <img src={muniraPhoto} alt="Munira" />
               </div>
             </div>
           </div>
@@ -542,7 +555,7 @@ export default function Portfolio() {
 
 
             <div className="about-image-column">
-              <img src="src/assets/img/moe_ebalo2.jpg" alt="Munira Satanova" />
+              <img src={munira2} alt="Munira Satanova" />
             </div>
           </div>
         </div>
@@ -591,7 +604,7 @@ export default function Portfolio() {
                   <span className="author-name">Alexis Delauney</span>
                   <span className="author-company">Siemens</span>
                 </div>
-                <img src="src/assets/img/siemens-logo.png" alt="Siemens" className="author-logo" />
+                <img src={siemens} alt="Siemens" className="author-logo" />
               </div>
             </div>
 
@@ -604,7 +617,7 @@ export default function Portfolio() {
                   <span className="author-name">Adelya Musaeva</span>
                   <span className="author-company">BOSCH</span>
                 </div>
-                <img src="src/assets/img/bosch-logo.png" alt="Bosch" className="author-logo" />
+                <img src={bosch} alt="Bosch" className="author-logo" />
               </div>
             </div>
 
@@ -616,7 +629,7 @@ export default function Portfolio() {
                   <span className="author-name">Azilia Adylgazieva</span>
                   <span className="author-company">Deutsche Telekom</span>
                 </div>
-                <img src="src/assets/img/dtelekom.png" alt="Deutsche Telekom" className="author-logo" />
+                <img src={dtelekom} alt="Deutsche Telekom" className="author-logo" />
               </div>
             </div>
           </div>
@@ -629,34 +642,34 @@ export default function Portfolio() {
         <div className="toolkit-carousel">
           <div className="toolkit-track">
             {/* Копия 1 */}
-            <img src="src/assets/img/toolkit/react.svg" alt="React" />
-            <img src="src/assets/img/toolkit/typescript.svg" alt="TypeScript" />
-            <img src="src/assets/img/toolkit/javascript.svg" alt="JavaScript" />
-            <img src="src/assets/img/toolkit/git.svg" alt="Git" />
-            <img src="src/assets/img/toolkit/figma.svg" alt="Figma" />
-            <img src="src/assets/img/toolkit/postgresql.svg" alt="PostgreSQL" />
-            <img src="src/assets/img/toolkit/springboot.svg" alt="Spring Boot" />
-            <img src="src/assets/img/toolkit/docker.svg" alt="Docker" />
+            <img src={reactLogo} alt="React" />
+            <img src={tsLogo} alt="TypeScript" />
+            <img src={jsLogo} alt="JavaScript" />
+            <img src={gitLogo} alt="Git" />
+            <img src={figmaLogo} alt="Figma" />
+            <img src={pgLogo} alt="PostgreSQL" />
+            <img src={springLogo} alt="Spring Boot" />
+            <img src={dockerLogo} alt="Docker" />
 
             {/* Копия 2 */}
-            <img src="src/assets/img/toolkit/react.svg" alt="React" />
-            <img src="src/assets/img/toolkit/typescript.svg" alt="TypeScript" />
-            <img src="src/assets/img/toolkit/javascript.svg" alt="JavaScript" />
-            <img src="src/assets/img/toolkit/git.svg" alt="Git" />
-            <img src="src/assets/img/toolkit/figma.svg" alt="Figma" />
-            <img src="src/assets/img/toolkit/postgresql.svg" alt="PostgreSQL" />
-            <img src="src/assets/img/toolkit/springboot.svg" alt="Spring Boot" />
-            <img src="src/assets/img/toolkit/docker.svg" alt="Docker" />
+            <img src={reactLogo} alt="React" />
+            <img src={tsLogo} alt="TypeScript" />
+            <img src={jsLogo} alt="JavaScript" />
+            <img src={gitLogo} alt="Git" />
+            <img src={figmaLogo} alt="Figma" />
+            <img src={pgLogo} alt="PostgreSQL" />
+            <img src={springLogo} alt="Spring Boot" />
+            <img src={dockerLogo} alt="Docker" />
 
             {/* Копия 3 🔥 */}
-            <img src="src/assets/img/toolkit/react.svg" alt="React" />
-            <img src="src/assets/img/toolkit/typescript.svg" alt="TypeScript" />
-            <img src="src/assets/img/toolkit/javascript.svg" alt="JavaScript" />
-            <img src="src/assets/img/toolkit/git.svg" alt="Git" />
-            <img src="src/assets/img/toolkit/figma.svg" alt="Figma" />
-            <img src="src/assets/img/toolkit/postgresql.svg" alt="PostgreSQL" />
-            <img src="src/assets/img/toolkit/springboot.svg" alt="Spring Boot" />
-            <img src="src/assets/img/toolkit/docker.svg" alt="Docker" />
+            <img src={reactLogo} alt="React" />
+            <img src={tsLogo} alt="TypeScript" />
+            <img src={jsLogo} alt="JavaScript" />
+            <img src={gitLogo} alt="Git" />
+            <img src={figmaLogo} alt="Figma" />
+            <img src={pgLogo} alt="PostgreSQL" />
+            <img src={springLogo} alt="Spring Boot" />
+            <img src={dockerLogo} alt="Docker" />
           </div>
         </div>
       </section>
@@ -876,7 +889,7 @@ export default function Portfolio() {
                   <div className="bar bar4"></div>
                 </div>
                 <div className="profile-image">
-                  <img src="src/assets/img/moe_ebalo.jpg" alt="Munira" />
+                  <img src={muniraPhoto} alt="Munira" />
                 </div>
               </div>
             </div>
