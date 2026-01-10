@@ -831,80 +831,86 @@ export default function Portfolio() {
           </div>
         </a>
       </div>
-      <section id="about" className="section">
-        <div className="section-container">
-          {/* ТОЛЬКО ЗАГОЛОВОК */}
-          <div className="about-header">
-            <div className="about-header-left">
-              <div className="about-span-container">
-                <div className="about-graphic">
-                  <div className="bar"></div>
-                  <div className="bar"></div>
-                  <div className="bar"></div>
-                  <div className="bar"></div>
-                  <div className="bar"></div>
+
+      <footer className="footer">
+        {/* Top bar */}
+        <div className="footer-top-bar">
+          <div className="footer-top-bar-content">
+            <div className="footer-top-bar-group">
+              <span className="footer-top-bar-text">
+                {time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+              </span>
+              <span className="footer-top-bar-text">
+                {time.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+              </span>
+            </div>
+            <div className="footer-top-bar-group">
+              <span className="footer-top-bar-text">Kyrgyz Republic</span>
+            </div>
+            <div className="footer-top-bar-group footer-status">
+              <div className="status-dot"></div>
+              <span className="footer-top-bar-text">Looking for Werkstudent internship</span>
+            </div>
+            <div className="footer-top-bar-group">
+              <div className="profile-container">
+                <div className="profile-bars">
+                  <div className="bar bar1"></div>
+                  <div className="bar bar2"></div>
+                  <div className="bar bar3"></div>
+                  <div className="bar bar4"></div>
                 </div>
-                <div className="about-span-text">
-                  <span className="bracket">(</span>
-                  <span className="text">ABOUT ME</span>
-                  <span className="bracket">)</span>
+                <div className="profile-image">
+                  <img src="src/assets/img/moe_ebalo.jpg" alt="Munira" />
                 </div>
               </div>
-              <h2 className="about-main-title">Fullstack Developer.<br />Tech Enthusiast.</h2>
-            </div>
-
-            <div className="about-header-right">
-              <p className="about-description">
-                Building digital experiences that feel as smooth as your favorite workflow.
-              </p>
-            </div>
-          </div>
-
-          {/* КОНТЕНТ ОТДЕЛЬНО */}
-          <div className="about-content-wrapper">
-            <div className="about-text-column">
-              <p className="about-text">
-                Hey, I’m Munira. I’m someone who finds satisfaction in{" "}
-                <span style={{ color: "#000" }}>things being finished</span> — not rushed, not abandoned halfway, but calmly brought to a point where they finally feel complete.
-              </p>
-
-              <p className="about-text">
-                I tend to notice{" "}
-                <span style={{ color: "#000" }}>details others overlook</span>. When something is almost right, I feel it immediately — and I can’t leave it there. A small adjustment, another pass, a quiet refinement, until everything{" "}
-                <span style={{ color: "#000" }}>settles into place</span>.
-              </p>
-
-              <p className="about-text">
-                When I’m not focused on a task, I usually slow things down:{" "}
-                <span style={{ color: "#000" }}>a cup of cappuccino</span>, good music, observing how things connect — visually, structurally, intuitively. I care about{" "}
-                <span style={{ color: "#000" }}>harmony, character, and intention</span>.
-              </p>
-
-
-            </div>
-
-            <div className="stat-item">
-              <div className="stat-label">Music Lover</div>
-              <div className="stat-value">110<span className="stat-unit">%</span></div>
-            </div>
-
-            <div className="stat-item">
-              <div className="stat-label">Cups of Cappuccino / Week</div>
-              <div className="stat-value">15<span className="stat-unit">+</span></div>
-            </div>
-
-            <div className="stat-item">
-              <div className="stat-label">Traveller Enthusiast</div>
-              <div className="stat-value">100<span className="stat-unit">%</span></div>
-            </div>
-
-
-            <div className="about-image-column">
-              <img src="src/assets/img/moe_ebalo2.jpg" alt="Munira Satanova" />
             </div>
           </div>
         </div>
-      </section>
+
+        {/* Footer content - 4 колонки между 2-й и 5-й линией */}
+        <div className="footer-content">
+          <div className="footer-column">
+            <h4 className="footer-heading">CONTACT ME</h4>
+            <a href="mailto:satanovamunira04@gmail.com" className="footer-link">
+              satanovamunira04@gmail.com
+            </a>
+          </div>
+
+          <div className="footer-column">
+            <h4 className="footer-heading">MENU</h4>
+            <nav className="footer-nav">
+              <a href="#home" className="footer-link">Home</a>
+              <a href="#about" className="footer-link">About</a>
+              <a href="#projects" className="footer-link">Projects</a>
+              <a href="https://drive.google.com/file/d/1Iwyl1CZlGXNkwSbFV7j6YMr2ZECAdHho/view?usp=sharing" target="_blank" rel="noopener" className="footer-link">Resume</a>
+            </nav>
+          </div>
+
+          <div className="footer-column">
+            <h4 className="footer-heading">SOCIAL MEDIA</h4>
+            <nav className="footer-nav">
+              <a href="https://www.linkedin.com/in/munira-satanova-b2004ilc/" target="_blank" rel="noopener" className="footer-link">LinkedIn</a>
+              <a href="https://www.instagram.com/abrokadavr?igsh=MWl5MXQyZHRva2s2NA==" target="_blank" rel="noopener" className="footer-link">Instagram</a>
+            </nav>
+          </div>
+
+          <div className="footer-column">
+            <h4 className="footer-heading">YOUR THOUGHTS</h4>
+            <div className="footer-scribble">
+              <svg viewBox="0 0 200 150" className="scribble-svg">
+                <path d="M20,75 Q60,20 100,75 T180,75" stroke="#fff" fill="none" strokeWidth="2" />
+              </svg>
+            </div>
+            <p className="footer-tagline">Made it to the footer? Go on, scribble a little.</p>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="footer-bottom">
+          <p className="footer-copyright">©2026</p>
+          <p className="footer-made">Made with love, peer pressure & red eyes.</p>
+        </div>
+      </footer>
 
 
       <div className="cursor-follower"></div>
