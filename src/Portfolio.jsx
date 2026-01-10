@@ -7,6 +7,7 @@ export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [time, setTime] = useState(new Date());
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const track = document.querySelector('.toolkit-track');
@@ -207,6 +208,23 @@ export default function Portfolio() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (menuOpen) {
+      // 🔥 Когда меню открывается
+      setTimeout(() => {
+        document.getElementById('footer')?.scrollIntoView({
+          behavior: 'auto', // мгновенный скролл
+          block: 'start'
+        });
+      }, 600); // после анимации overlay
+    } else {
+      // 🔥 Когда меню закрывается
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }, 600);
+    }
+  }, [menuOpen]);
+
   // 🔥 Lenis smooth scroll + blur эффект (ОБЪЕДИНЕНО)
   useEffect(() => {
     const lenis = new Lenis({
@@ -306,12 +324,10 @@ export default function Portfolio() {
       <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
         <div className="nav-content">
           <div className="logo" onClick={() => scrollToSection('home')}>MUNIRA</div>
-          <div className="menu-icon">
-            <div className="menu-line"></div>
-            <div className="menu-line"></div>
-          </div>
+
         </div>
       </nav>
+
 
       <div className="top-bar">
         <div className="top-bar-content">
@@ -832,7 +848,7 @@ export default function Portfolio() {
         </a>
       </div>
 
-      <footer className="footer">
+      <footer id="footer" className="footer">
         {/* Top bar */}
         <div className="footer-top-bar">
           <div className="footer-top-bar-content">
@@ -892,16 +908,6 @@ export default function Portfolio() {
               <a href="https://www.linkedin.com/in/munira-satanova-b2004ilc/" target="_blank" rel="noopener" className="footer-link">LinkedIn</a>
               <a href="https://www.instagram.com/abrokadavr?igsh=MWl5MXQyZHRva2s2NA==" target="_blank" rel="noopener" className="footer-link">Instagram</a>
             </nav>
-          </div>
-
-          <div className="footer-column">
-            <h4 className="footer-heading">YOUR THOUGHTS</h4>
-            <div className="footer-scribble">
-              <svg viewBox="0 0 200 150" className="scribble-svg">
-                <path d="M20,75 Q60,20 100,75 T180,75" stroke="#fff" fill="none" strokeWidth="2" />
-              </svg>
-            </div>
-            <p className="footer-tagline">Made it to the footer? Go on, scribble a little.</p>
           </div>
         </div>
 

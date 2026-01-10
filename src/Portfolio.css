@@ -2924,3 +2924,442 @@ body {
         /* было 93% */
     }
 }
+
+@media (max-width: 1024px) {
+    .about-content-wrapper {
+        grid-template-columns: 7% 1fr 7%;
+        row-gap: 4rem;
+    }
+
+    .about-text-column {
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .about-image-column {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .stat-item:nth-child(2),
+    .stat-item:nth-child(3),
+    .stat-item:nth-child(4) {
+        grid-column: 2;
+        grid-row: auto;
+    }
+
+    .about-content-wrapper::after {
+        grid-column: 2;
+        margin-top: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-header {
+        grid-template-columns: 5% 1fr 5%;
+        padding: 0;
+    }
+
+    .about-header-left,
+    .about-header-right {
+        grid-column: 2;
+    }
+
+    .about-main-title {
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonials-header {
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .testimonials-header-slash {
+        font-size: 1.5rem;
+    }
+
+    .testimonials-header-title {
+        font-size: 1rem;
+    }
+
+    .testimonials-circle {
+        width: 250px;
+        height: 250px;
+    }
+
+    .quote-marks {
+        font-size: 8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .playground-text-wrapper {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-bottom: 100px;
+    }
+
+    .playground-text-left,
+    .playground-text-right {
+        width: 100%;
+        align-items: center;
+    }
+
+    .playground-text-left h2,
+    .playground-text-right h2 {
+        font-size: 32px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 1024px) {
+    .potential-section {
+        padding: 60px 0 0 0;
+        margin-top: 3rem;
+    }
+
+    .potential-title {
+        font-size: clamp(3rem, 8vw, 5rem);
+        padding: 0 24px;
+    }
+
+    .speedometer-wrapper {
+        width: 700px;
+        height: 700px;
+        margin-bottom: -250px;
+    }
+
+    .speedometer-circle {
+        width: 600px;
+        height: 600px;
+    }
+
+    .speedometer-pin {
+        height: 300px;
+    }
+
+    .line-main {
+        transform-origin: center 331px;
+    }
+
+    .line-secondary {
+        transform-origin: center 325px;
+    }
+}
+
+@media (max-width: 768px) {
+    .potential-section {
+        padding: 40px 0 0 0;
+        margin-top: 2rem;
+        gap: 24px;
+    }
+
+    .potential-title {
+        font-size: clamp(1.8rem, 7vw, 3rem) !important;
+        white-space: normal;
+        line-height: 1.1;
+        padding: 0 20px;
+    }
+
+    .speedometer-wrapper {
+        width: 100%;
+        max-width: 500px;
+        height: 500px;
+        margin-bottom: -150px;
+    }
+
+    .speedometer-circle {
+        width: 400px;
+        height: 400px;
+    }
+
+    .speedometer-pin {
+        height: 200px;
+    }
+
+    /* 🔥 Фикс для делений */
+    .line-main {
+        width: 4px;
+        height: 30px;
+        top: 20px;
+        transform-origin: center 231px;
+    }
+
+    .line-secondary {
+        width: 2px;
+        height: 20px;
+        top: 20px;
+        transform-origin: center 225px;
+    }
+
+    /* 🔥 Текст внутри */
+    .potential-description {
+        top: 28%;
+        padding: 0 40px;
+        max-width: 350px;
+    }
+
+    .potential-description p {
+        font-size: 0.75rem;
+        line-height: 1.5;
+    }
+
+    /* 🔥 Кнопка Resume */
+    .resume-button {
+        bottom: 48%;
+        padding: 8px 8px 8px 20px;
+        height: 56px;
+        gap: 16px;
+    }
+
+    .resume-text p {
+        font-size: 28px !important;
+    }
+
+    .arrow-container {
+        width: 40px;
+        height: 40px;
+    }
+
+    .arrow-circle svg {
+        width: 24px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .potential-title {
+        font-size: clamp(1.5rem, 9vw, 2.5rem) !important;
+        padding: 0 15px;
+    }
+
+    .speedometer-wrapper {
+        max-width: 350px;
+        height: 350px;
+        margin-bottom: -100px;
+    }
+
+    .speedometer-circle {
+        width: 280px;
+        height: 280px;
+    }
+
+    .speedometer-pin {
+        height: 140px;
+        width: 3px;
+    }
+
+    /* 🔥 Деления еще меньше */
+    .line-main {
+        width: 3px;
+        height: 20px;
+        top: 15px;
+        transform-origin: center 161px;
+    }
+
+    .line-secondary {
+        width: 1.5px;
+        height: 15px;
+        top: 15px;
+        transform-origin: center 157px;
+    }
+
+    /* 🔥 Текст компактнее */
+    .potential-description {
+        top: 26%;
+        padding: 0 20px;
+        max-width: 250px;
+    }
+
+    .potential-description p {
+        font-size: 0.65rem;
+        line-height: 1.4;
+    }
+
+    /* 🔥 Кнопка совсем маленькая */
+    .resume-button {
+        bottom: 45%;
+        padding: 6px 6px 6px 16px;
+        height: 44px;
+        gap: 12px;
+        border-radius: 22px;
+    }
+
+    .resume-text p {
+        font-size: 20px !important;
+    }
+
+    .arrow-container {
+        width: 32px;
+        height: 32px;
+    }
+
+    .arrow-circle svg {
+        width: 18px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 375px) {
+    .potential-title {
+        font-size: 1.3rem !important;
+    }
+
+    .speedometer-wrapper {
+        max-width: 300px;
+        height: 300px;
+        margin-bottom: -80px;
+    }
+
+    .speedometer-circle {
+        width: 240px;
+        height: 240px;
+    }
+
+    .speedometer-pin {
+        height: 120px;
+    }
+
+    .line-main {
+        transform-origin: center 138px;
+    }
+
+    .line-secondary {
+        transform-origin: center 134px;
+    }
+
+    .potential-description {
+        padding: 0 15px;
+        max-width: 200px;
+    }
+
+    .potential-description p {
+        font-size: 0.6rem;
+    }
+
+    .resume-text p {
+        font-size: 18px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-title {
+        font-size: clamp(1.5rem, 5vw, 3rem);
+        white-space: normal;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .footer-top-bar-content,
+    .footer-content {
+        grid-template-columns: 3% 1fr 3%;
+        gap: 3rem;
+    }
+
+    .footer-top-bar-group:nth-child(1),
+    .footer-top-bar-group:nth-child(2),
+    .footer-top-bar-group:nth-child(3),
+    .footer-top-bar-group:nth-child(4) {
+        grid-column: 2;
+        justify-self: start;
+    }
+
+    .footer-column:nth-child(1),
+    .footer-column:nth-child(2),
+    .footer-column:nth-child(3),
+    .footer-column:nth-child(4) {
+        grid-column: 2;
+    }
+
+    .footer-bottom {
+        grid-template-columns: 5% 1fr 5%;
+        gap: 1rem;
+    }
+
+    .footer-copyright,
+    .footer-made {
+        grid-column: 2;
+        justify-self: start;
+    }
+}
+
+/* ========================================
+   🔥 PAGE TRANSITION
+   ======================================== */
+
+/* Анимация линий в крестик */
+.menu-icon {
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.menu-icon .menu-line {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-icon.open .menu-line:first-child {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.menu-icon.open .menu-line:last-child {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
+/* Transition Overlay */
+.page-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    z-index: 9999;
+    pointer-events: none;
+    transform: translateY(-100%);
+    transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.page-transition.active {
+    transform: translateY(0);
+    animation: slideDownUp 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@keyframes slideDownUp {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .menu-icon.open .menu-line:first-child {
+        transform: translateY(10px) rotate(45deg);
+    }
+
+    .menu-icon.open .menu-line:last-child {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-icon.open .menu-line:first-child {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-icon.open .menu-line:last-child {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
