@@ -31,14 +31,23 @@
     --grid-line-3: calc(7% + 2 * 86% / 4);
     --grid-line-4: calc(7% + 3 * 86% / 4);
     --grid-line-5: 93%;
-
-
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+.project-card:nth-child(1) .project-image,
+.project-card:nth-child(2) .project-image,
+.project-card:nth-child(3) .project-image,
+.project-card:nth-child(4) .project-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 body {
@@ -1406,7 +1415,6 @@ body {
     font-family: 'Clash Display', sans-serif;
     color: #5a6c7d;
     line-height: 1.8;
-    margin-bottom: 1.5rem;
 }
 
 .project-tech {
@@ -1425,8 +1433,6 @@ body {
     color: #34495e;
     font-weight: 500;
 }
-
-
 
 @media (max-width: 1024px) {
     .projects-header {
@@ -1456,7 +1462,6 @@ body {
     .projects-header {
         grid-template-columns: var(--grid-line-1) 1fr var(--grid-line-1);
         padding: 0;
-        margin-bottom: 2rem;
     }
 
     .projects-header-left,
@@ -1472,6 +1477,12 @@ body {
 
     .projects-description {
         font-size: 0.95rem;
+    }
+
+     .project-image {
+        will-change: transform;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
     }
 
     .projects-grid {
@@ -3035,6 +3046,7 @@ body {
     .about-header {
         grid-template-columns: 5% 1fr 5%;
         padding: 0;
+
     }
 
     .about-header-left,
@@ -3044,6 +3056,7 @@ body {
 
     .about-main-title {
         font-size: clamp(1.8rem, 5vw, 2.5rem);
+        margin-bottom: 1rem;
     }
 }
 
@@ -3312,10 +3325,19 @@ body {
 
 @media (max-width: 768px) {
 
+    .footer-heading{
+        margin: 0;
+    }
+
+    .footer-top-bar{
+        padding: 100px 0 25px;
+    }
+
     .footer-top-bar-content,
     .footer-content {
         grid-template-columns: 3% 1fr 3%;
-        gap: 3rem;
+        gap: 1rem;
+        padding: 50px 0;
     }
 
     .footer-top-bar-group:nth-child(1),
@@ -3334,7 +3356,7 @@ body {
     }
 
     .footer-bottom {
-        grid-template-columns: 5% 1fr 5%;
+        grid-template-columns: 3% 1fr 3%;
         gap: 1rem;
     }
 
