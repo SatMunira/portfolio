@@ -515,11 +515,7 @@ body {
 
 @media (max-width: 768px) {
     .hero {
-        padding-top: calc(100px + 120px);
-        /* было 90px */
-        padding-left: 5%;
-        /* явно добавлен */
-        padding-right: 5%;
+        padding: 10% 5% 0;
     }
 }
 
@@ -729,22 +725,6 @@ body {
 .hero-cta:hover svg {
     transform: translateX(5px);
 }
-
-/* Планшеты */
-@media (max-width: 1024px) {
-    .hero {
-        padding-top: calc(120px + 110px);
-    }
-}
-
-/* Мобилки */
-@media (max-width: 768px) {
-    .hero {
-        padding-top: calc(100px + 120px);
-    }
-}
-
-
 
 .section-title::after {
     content: '';
