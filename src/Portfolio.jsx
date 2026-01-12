@@ -759,7 +759,7 @@ export default function Portfolio() {
                 <p>The gauge never stays still.</p>
               </div>
 
-              <a href="https://drive.google.com/file/d/1Iwyl1CZlGXNkwSbFV7j6YMr2ZECAdHho/view?usp=sharing"
+              <a href="https://drive.google.com/file/d/1td_YyfRl3Y6cdvMUpnb615qxn7nzuTQc/view?usp=sharing"
                 className="resume-button"
                 target="_blank"
                 rel="noopener">
@@ -876,7 +876,7 @@ export default function Portfolio() {
               <a href="#home" className="footer-link">Home</a>
               <a href="#about" className="footer-link">About</a>
               <a href="#projects" className="footer-link">Projects</a>
-              <a href="https://drive.google.com/file/d/1Iwyl1CZlGXNkwSbFV7j6YMr2ZECAdHho/view?usp=sharing" target="_blank" rel="noopener" className="footer-link">Resume</a>
+              <a href="https://drive.google.com/file/d/1td_YyfRl3Y6cdvMUpnb615qxn7nzuTQc/view?usp=sharing" target="_blank" rel="noopener" className="footer-link">Resume</a>
             </nav>
           </div>
 
