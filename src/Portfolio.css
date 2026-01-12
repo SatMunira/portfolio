@@ -1786,6 +1786,17 @@ body {
     }
 }
 
+@media (max-width: 768px) {
+
+    
+    .contact-wrapper,
+    .footer,
+    .contact-cta {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+}
+
 /* ========================================
    🔥 TESTIMONIALS SECTION
    ======================================== */
@@ -2223,6 +2234,45 @@ body {
     .playground-text-left h2,
     .playground-text-right h2 {
         text-align: center;
+    }
+}
+/* 🔥 Для мобильных - быстрее и проще */
+@media (max-width: 768px) {
+    .playground-card {
+        transform: translateY(30px); /* меньше сдвиг */
+        transition: all 0.4s ease; /* быстрее */
+    }
+    
+    .playground-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .playground-section {
+        overflow-x: hidden; /* 🔥 только на мобильных */
+    }
+    
+    .playground-text-wrapper {
+        padding: 0;
+        top: 8%; 
+    }
+    
+    .playground-text-left,
+    .playground-text-right {
+        width: 100%;
+        align-items: center;
+    }
+
+    .playground-text-left h2,
+    .playground-text-right h2 {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    .playground-cards{
+        padding: 10vh 0 0;
     }
 }
 
@@ -2945,6 +2995,10 @@ body {
         --grid-line-5: 95%;
         /* было 93% */
     }
+
+    .playground-section{
+        overflow: hidden;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -3016,25 +3070,6 @@ body {
     }
 }
 
-@media (max-width: 768px) {
-    .playground-text-wrapper {
-        flex-direction: column;
-        gap: 0.5rem;
-        padding-bottom: 100px;
-    }
-
-    .playground-text-left,
-    .playground-text-right {
-        width: 100%;
-        align-items: center;
-    }
-
-    .playground-text-left h2,
-    .playground-text-right h2 {
-        font-size: 32px;
-        text-align: center;
-    }
-}
 
 @media (max-width: 1024px) {
     .potential-section {

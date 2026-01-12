@@ -69,8 +69,8 @@ export default function Portfolio() {
     };
   }, []);
 
-  // Playground scroll animations
-  useEffect(() => {
+// Playground scroll animations
+useEffect(() => {
     const textWrapper = document.querySelector('.playground-text-wrapper');
     const textLeft = document.querySelector('.playground-text-left');
     const textRight = document.querySelector('.playground-text-right');
@@ -78,39 +78,44 @@ export default function Portfolio() {
 
     // 🔥 Плавное раздвигание текста при скролле
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const playgroundSection = document.getElementById('playground');
-      if (!playgroundSection || !textWrapper) return;
+        const scrollY = window.scrollY;
+        const playgroundSection = document.getElementById('playground');
+        if (!playgroundSection || !textWrapper) return;
 
-      const sectionTop = playgroundSection.offsetTop;
-      const scrollProgress = scrollY - sectionTop;
+        const sectionTop = playgroundSection.offsetTop;
+        const scrollProgress = scrollY - sectionTop;
 
-      // 🔥 Настройки
-      const maxScroll = 500; // медленнее раздвигается
-      const progress = Math.min(Math.max(scrollProgress / maxScroll, 0), 1);
+        // 🔥 Проверка размера экрана
+        const isMobile = window.innerWidth <= 768;
+         if (isMobile) {
+        if (textLeft && textRight) {
+            textLeft.style.transform = 'translateX(0)';
+            textRight.style.transform = 'translateX(0)';
+        }
+        return;
+    }
+        
+        const progress = Math.min(Math.max(scrollProgress / maxScroll, 0), 1);
+        const currentGap = progress * maxGap;
 
-      const maxGap = 16; // не слишком далеко
-      const currentGap = progress * maxGap;
-
-      // Применяем трансформацию
-      if (textLeft && textRight) {
-        textLeft.style.transform = `translateX(-${currentGap}vw)`;
-        textRight.style.transform = `translateX(${currentGap}vw)`;
-      }
-
-      // 🔥 УБРАЛИ класс .split - он вызывал дергание
+        // Применяем трансформацию
+        if (textLeft && textRight) {
+            textLeft.style.transform = `translateX(-${currentGap}vw)`;
+            textRight.style.transform = `translateX(${currentGap}vw)`;
+        }
     };
 
-    // Observer для карточек
+    const isMobile = window.innerWidth <= 768;
+    
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
     }, {
-      threshold: 0.3,
-      rootMargin: '-100px'
+        threshold: isMobile ? 0.1 : 0.3, // 🔥 на мобильных раньше появляются
+        rootMargin: isMobile ? '0px' : '-100px' // 🔥 на мобильных без отступа
     });
 
     cards.forEach(card => observer.observe(card));
@@ -118,10 +123,12 @@ export default function Portfolio() {
     handleScroll();
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', handleScroll);
+        observer.disconnect();
+        window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+}, []);
+
+   
 
   // Testimonials scroll animation
   useEffect(() => {
