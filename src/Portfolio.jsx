@@ -399,7 +399,7 @@ export default function Portfolio() {
                   <span className="bracket">)</span>
                 </div>
               </div>
-              <h2 className="projects-main-title">Freshly Cooked Designs</h2>
+              <h2 className="projects-main-title">Freshly Cooked Interfaces</h2>
             </div>
             <div className="projects-header-right">
               <p className="projects-description">
@@ -657,19 +657,19 @@ export default function Portfolio() {
           
           <div className="playground-text-wrapper">
             <div className="playground-text-left">
-              <h2>Crafting digital</h2>
-              <h2 className="text-italic">that truly</h2>
+              <h2>Building digital</h2>
+              <h2 className="text-italic">that scale</h2>
             </div>
             <div className="playground-text-right">
-              <h2>experiences</h2>
-              <h2>delight</h2>
+              <h2>solutions</h2>
+              <h2>beautifully</h2>
             </div>
           </div>
 
           <div className="playground-cards">
             <div className="playground-card">
               <div className="card-header">
-                <h3>UX Research</h3>
+                <h3>Frontend<br />Development</h3>
                 <div className="card-dots">
                   <span className="dot active"></span>
                   <span className="dot"></span>
@@ -681,13 +681,13 @@ export default function Portfolio() {
                 <img src="https://framerusercontent.com/images/ux3d5Re26BvQ1hMY6HFoUzaWtHA.svg?width=18&height=100" alt="Arrow" className="compass-arrow" />
               </div>
               <p className="card-description">
-                Research is my "nakshe ka compass" decoding user behavior to craft experiences that resonates.
+                Frontend is my canvas — turning designs into pixel-perfect, responsive interfaces with React, TypeScript, and modern CSS.
               </p>
             </div>
 
             <div className="playground-card">
               <div className="card-header">
-                <h3>Visual Design<br />& Branding</h3>
+                <h3>Backend<br />Architecture</h3>
                 <div className="card-dots">
                   <span className="dot active"></span>
                   <span className="dot active"></span>
@@ -699,13 +699,13 @@ export default function Portfolio() {
                 <img src="https://framerusercontent.com/images/nJnhkgaAyHW1ZSoDX71zT6bWucA.svg?width=30&height=44" alt="Brush" className="palette-brush" />
               </div>
               <p className="card-description">
-                Visual design is my "canvas ka magic", making every screen a feast for the eyes.
+                Backend is my engine — building robust APIs, databases, and server logic with Spring Boot, PostgreSQL, and REST.
               </p>
             </div>
 
             <div className="playground-card">
               <div className="card-header">
-                <h3>Service Design</h3>
+                <h3>Full-Stack<br />Integration</h3>
                 <div className="card-dots">
                   <span className="dot active"></span>
                   <span className="dot active"></span>
@@ -717,7 +717,7 @@ export default function Portfolio() {
                 <img src="https://framerusercontent.com/images/Q7x7MuONdp0b9SNGrEqqnmMw.svg?width=171&height=207" alt="Rocket" className="rocket-ship" />
               </div>
               <p className="card-description">
-                Service design is my rocket, designing holistic experiences that work smoothly behind the scenes.
+                Full-stack is my rocket — seamlessly connecting frontend and backend to deliver complete, production-ready applications.
               </p>
             </div>
           </div>
@@ -729,7 +729,7 @@ export default function Portfolio() {
         <div className="potential-overlay"></div>
 
         <div className="potential-container">
-          <h2 className="potential-title">WORKING TO FULL POTENTIAL</h2>
+          <h2 className="potential-title">BUILDING WITH CODE</h2>
 
           <div className="speedometer-wrapper">
             <div className="speedometer">
