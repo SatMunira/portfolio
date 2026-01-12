@@ -1,0 +1,893 @@
+import React, { useState, useEffect } from 'react';
+import { Mail, Github, Linkedin, ExternalLink, Briefcase, GraduationCap, Code, Database, Globe } from 'lucide-react';
+import './Portfolio.css';
+import Lenis from '@studio-freight/lenis';
+import muniraPhoto from './assets/img/moe_ebalo.jpg';
+import siemens from './assets/img/siemens-logo.png';
+import bosch from './assets/img/bosch-logo.png';
+import dtelekom from './assets/img/dtelekom.png';
+import figmaLogo from './assets/img/toolkit/figma.png';
+import illustratorLogo from './assets/img/toolkit/illustrator.png';
+import photoshopLogo from './assets/img/toolkit/photoshop.png';
+import premiereProLogo from './assets/img/toolkit/premiere-pro.png';
+import notionLogo from './assets/img/toolkit/notion.png';
+import afterEffectsLogo from './assets/img/toolkit/after-effects.png';
+import munira2 from './assets/img/moe_ebalo2.jpg';
+
+export default function Portfolio() {
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const [time, setTime] = useState(new Date());
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const track = document.querySelector('.toolkit-track');
+    const firstSet = track.children.length / 3;
+    let setWidth = 0;
+    for (let i = 0; i < firstSet; i++) {
+      setWidth += track.children[i].offsetWidth + 61;
+    }
+    track.style.setProperty('--scroll-distance', `-${setWidth}px`);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = document.getElementById('potential');
+      const circle = document.querySelector('.speedometer-circle');
+      const pin = document.querySelector('.speedometer-pin');
+
+      if (!section || !circle || !pin) return;
+
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const scrollY = window.scrollY;
+      const scrollProgress = (scrollY - sectionTop) / (sectionHeight / 2);
+      const progress = Math.min(Math.max(scrollProgress, 0), 1);
+      const startAngle = 0;
+      const endAngle = 90;
+      const currentAngle = startAngle + (progress * (endAngle - startAngle));
+
+      circle.style.transform = `translate(-50%, -50%) rotate(${currentAngle}deg)`;
+      pin.style.transform = `translate(-50%, -100%) rotate(${currentAngle}deg)`;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const textWrapper = document.querySelector('.playground-text-wrapper');
+    const textLeft = document.querySelector('.playground-text-left');
+    const textRight = document.querySelector('.playground-text-right');
+    const cards = document.querySelectorAll('.playground-card');
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const playgroundSection = document.getElementById('playground');
+      if (!playgroundSection || !textWrapper) return;
+
+      const sectionTop = playgroundSection.offsetTop;
+      const scrollProgress = scrollY - sectionTop;
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
+        if (textLeft && textRight) {
+          textLeft.style.transform = 'translateX(0)';
+          textRight.style.transform = 'translateX(0)';
+        }
+        return;
+      }
+      
+      const maxScroll = 500;
+      const maxGap = 16;
+      const progress = Math.min(Math.max(scrollProgress / maxScroll, 0), 1);
+      const currentGap = progress * maxGap;
+
+      if (textLeft && textRight) {
+        textLeft.style.transform = `translateX(-${currentGap}vw)`;
+        textRight.style.transform = `translateX(${currentGap}vw)`;
+      }
+    };
+
+    const isMobile = window.innerWidth <= 768;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: isMobile ? 0.1 : 0.3,
+      rootMargin: isMobile ? '0px' : '-100px'
+    });
+
+    cards.forEach(card => observer.observe(card));
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      const projectCards = document.querySelectorAll('.project-card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px'
+      });
+      
+      projectCards.forEach(card => observer.observe(card));
+      return () => observer.disconnect();
+    }
+  }, []);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const cards = document.querySelectorAll('.testimonial-card');
+    cards.forEach(card => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const animateValue = (valueElement, start, end, duration) => {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const current = Math.floor(progress * (end - start) + start);
+
+        const textNode = Array.from(valueElement.childNodes).find(node => node.nodeType === 3);
+        if (textNode) {
+          textNode.textContent = current;
+        } else {
+          const unit = valueElement.querySelector('.stat-unit');
+          valueElement.textContent = current;
+          if (unit) valueElement.appendChild(unit);
+        }
+
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    };
+
+    const isMobile = window.innerWidth <= 768;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const statItems = document.querySelectorAll('.stat-item');
+
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+
+            const value1 = statItems[0]?.querySelector('.stat-value');
+            if (value1) animateValue(value1, 0, 150, 2000);
+
+            const value2 = statItems[1]?.querySelector('.stat-value');
+            if (value2) animateValue(value2, 0, 25, 2000);
+
+            const value3 = statItems[2]?.querySelector('.stat-value');
+            if (value3) animateValue(value3, 0, 100, 2000);
+          } else {
+            entry.target.classList.remove('animated');
+
+            statItems.forEach((item) => {
+              const valueEl = item.querySelector('.stat-value');
+              if (valueEl) {
+                const unit = valueEl.querySelector('.stat-unit');
+                const textNode = Array.from(valueEl.childNodes).find(node => node.nodeType === 3);
+                if (textNode) {
+                  textNode.textContent = '0';
+                } else {
+                  valueEl.textContent = '0';
+                  if (unit) valueEl.appendChild(unit);
+                }
+              }
+            });
+          }
+        });
+      },
+      { 
+        threshold: isMobile ? 0.2 : 0.3,
+        rootMargin: '0px'
+      }
+    );
+
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) observer.observe(aboutSection);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (menuOpen) {
+      setTimeout(() => {
+        document.getElementById('footer')?.scrollIntoView({
+          behavior: 'auto',
+          block: 'start'
+        });
+      }, 600);
+    } else {
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }, 600);
+    }
+  }, [menuOpen]);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.0,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+      smoothTouch: false
+    });
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const maxScroll = 200;
+      const blurAmount = Math.min(scrollY / maxScroll * 20, 20);
+      const bgOpacity = Math.min(scrollY / maxScroll * 0.8, 0.8);
+
+      document.querySelector('.nav')?.style.setProperty('--blur-amount', `${blurAmount}px`);
+      document.querySelector('.nav')?.style.setProperty('--bg-opacity', bgOpacity);
+      setScrolled(scrollY > 50);
+
+      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const current = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+      if (current) setActiveSection(current);
+    };
+
+    lenis.on('scroll', handleScroll);
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const follower = document.querySelector('.cursor-follower');
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    const offsetX = 14;
+    const offsetY = 14;
+    const speed = 0.2;
+
+    const move = () => {
+      currentX += (mouseX - currentX) * speed;
+      currentY += (mouseY - currentY) * speed;
+
+      follower.style.transform = `translate(${currentX + offsetX}px, ${currentY + offsetY}px)`;
+      requestAnimationFrame(move);
+    };
+
+    const onMouseMove = (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+    move();
+
+    return () => window.removeEventListener('mousemove', onMouseMove);
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className="portfolio">
+      <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
+        <div className="nav-content">
+          <div className="logo" onClick={() => scrollToSection('home')}>MUNIRA</div>
+        </div>
+      </nav>
+
+      <div className="top-bar">
+        <div className="top-bar-content">
+          <div className="top-bar-group">
+            <span className="top-bar-text">
+              {time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+            </span>
+            <span className="top-bar-text">
+              {time.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+            </span>
+          </div>
+          <div className="top-bar-group">
+            <span className="top-bar-text">Germany</span>
+          </div>
+          <div className="top-bar-group top-bar-status">
+            <div className="status-dot"></div>
+            <span className="top-bar-text">Looking for UI/UX Design Opportunities</span>
+          </div>
+          <div className="top-bar-group">
+            <div className="profile-container">
+              <div className="profile-bars">
+                <div className="bar bar1"></div>
+                <div className="bar bar2"></div>
+                <div className="bar bar3"></div>
+                <div className="bar bar4"></div>
+              </div>
+              <div className="profile-image">
+                <img src={muniraPhoto} alt="Munira" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section id="home" className="hero">
+        <div className="hero-content">
+          <div className="hero-text">
+            <div className="hero-title-container">
+              <h1 className="hero-title">UI/UX &nbsp; DESIGNER</h1>
+              <div className="hero-title-gif">
+                <img src="https://framerusercontent.com/images/4CXxaChy4DWdxp8HB0coVXQTNB8.gif" alt="Designer Animation" />
+              </div>
+            </div>
+            <p className="hero-description">
+              Hi, I'm <span style={{ color: '#000' }}>Munira Satanova</span>. I craft <span style={{ color: '#000' }}>intuitive interfaces</span> and <span style={{ color: '#000' }}>meaningful experiences</span> that connect people with technology. <br />
+              I design worlds where <span style={{ color: '#000' }}>beauty meets usability</span>, creating products that users love and businesses trust.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" className="section">
+        <div className="section-container">
+          <div className="projects-header">
+            <div className="projects-header-left">
+              <div className="projects-span-container">
+                <div className="projects-graphic">
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                </div>
+                <div className="projects-span-text">
+                  <span className="bracket">(</span>
+                  <span className="text">CASE STUDIES</span>
+                  <span className="bracket">)</span>
+                </div>
+              </div>
+              <h2 className="projects-main-title">Featured Design Work</h2>
+            </div>
+            <div className="projects-header-right">
+              <p className="projects-description">
+                (A selection of my <span className="highlight">design projects</span> showcasing user-centered solutions)
+              </p>
+            </div>
+          </div>
+
+          <div className="projects-grid">
+            {[
+              {
+                title: 'UniFlow UX Redesign',
+                desc: 'Complete UX/UI redesign of a student productivity platform, focusing on information architecture, user flows, and visual design to enhance usability.',
+                github: 'https://www.behance.net/'
+              },
+              {
+                title: 'Financial Dashboard Design',
+                desc: 'Designed an intuitive dashboard for financial analytics with focus on data visualization, hierarchy, and user-friendly navigation for complex information.',
+                github: 'https://www.behance.net/'
+              },
+              {
+                title: 'Document Management System',
+                desc: 'Created a clean, minimalist interface for digital document organization with emphasis on accessibility, search functionality, and user workflows.',
+                github: 'https://www.behance.net/'
+              },
+              {
+                title: 'Book Discovery App',
+                desc: 'Designed a modern book discovery experience with personalized recommendations, intuitive categorization, and engaging micro-interactions.',
+                github: 'https://www.behance.net/'
+              }
+            ].map((project, i) => (
+              <div key={i} className="project-card">
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-image-link"
+                  onMouseMove={(e) => {
+                    const badge = e.currentTarget.querySelector('.project-badge');
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    badge.style.transform = `translate(${x}px, ${y}px)`;
+                  }}
+                  onMouseEnter={(e) => {
+                    const badge = e.currentTarget.querySelector('.project-badge');
+                    badge.style.opacity = '1';
+                  }}
+                  onMouseLeave={(e) => {
+                    const badge = e.currentTarget.querySelector('.project-badge');
+                    badge.style.opacity = '0';
+                  }}
+                >
+                  <div className="project-image">
+                    <div className="project-badge">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                      </svg>
+                      <span>VIEW CASE STUDY</span>
+                    </div>
+                  </div>
+                </a>
+                <div className="project-content">
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className="section">
+        <div className="section-container">
+          <div className="about-header">
+            <div className="about-header-left">
+              <div className="about-span-container">
+                <div className="about-graphic">
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                  <div className="bar"></div>
+                </div>
+                <div className="about-span-text">
+                  <span className="bracket">(</span>
+                  <span className="text">ABOUT ME</span>
+                  <span className="bracket">)</span>
+                </div>
+              </div>
+              <h2 className="about-main-title">UI/UX Designer.<br />Creative Problem Solver.</h2>
+            </div>
+
+            <div className="about-header-right">
+              <p className="about-description">
+                Designing experiences that feel effortless and look unforgettable.
+              </p>
+            </div>
+          </div>
+
+          <div className="about-content-wrapper">
+            <div className="about-text-column">
+              <p className="about-text">
+                Hey, I'm Munira. I'm someone who believes that great design isn't just about{" "}
+                <span style={{ color: "#000" }}>how things look</span> — it's about how they feel, how they work, and how they solve real problems.
+              </p>
+
+              <p className="about-text">
+                I obsess over{" "}
+                <span style={{ color: "#000" }}>the small details</span> — the spacing, the flow, the moment when everything clicks into place. When a design feels almost right, I keep refining until it's{" "}
+                <span style={{ color: "#000" }}>just right</span>.
+              </p>
+
+              <p className="about-text">
+                Outside of design work, I find inspiration in everyday moments:{" "}
+                <span style={{ color: "#000" }}>a good cappuccino</span>, music that sets the mood, observing how people naturally interact with the world around them. I care deeply about{" "}
+                <span style={{ color: "#000" }}>empathy, aesthetics, and intention</span>.
+              </p>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Foodie lover</div>
+              <div className="stat-value">110<span className="stat-unit">%</span></div>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">Cups of Cappuccino / Week</div>
+              <div className="stat-value">15<span className="stat-unit">+</span></div>
+            </div>
+
+            <div className="stat-item">
+              <div className="stat-label">User-Centered Mindset</div>
+              <div className="stat-value">100<span className="stat-unit">%</span></div>
+            </div>
+
+            <div className="about-image-column">
+              <img src={munira2} alt="Munira Satanova" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" className="testimonials-section">
+        <div className="testimonials-header">
+          <span className="testimonials-header-slash">//</span>
+          <h2 className="testimonials-header-title">TESTIMONIALS</h2>
+          <span className="testimonials-header-slash">//</span>
+        </div>
+        <p className="testimonials-subtitle">(© all bragging rights reserved by me)</p>
+
+        <div className="testimonials-container">
+          <div className="testimonials-circle-wrapper">
+            <div className="testimonials-circle">
+              <svg className="rotating-text" viewBox="0 0 200 200">
+                <path
+                  id="circlePath"
+                  d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"
+                  fill="none"
+                />
+                <text fontSize="12" fill="#fff" letterSpacing="7.5">
+                  <textPath href="#circlePath">
+                    TESTIMONIAL - SEASONED WITH LOVE -
+                  </textPath>
+                </text>
+              </svg>
+
+              <div className="quote-marks">
+                <span style={{ fontWeight: 700 }}>,,</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="testimonials-content">
+            <div className="testimonial-card testimonial-right">
+              <p className="testimonial-text">
+                Munira was a pleasure to work with at Siemens. Her design skills and attention to detail were invaluable to our team. She has a great eye for user experience and knows how to translate complex requirements into intuitive interfaces. I highly recommend Munira for any design project.
+              </p>
+              <div className="testimonial-author">
+                <div className="author-info">
+                  <span className="author-name">Alexis Delauney</span>
+                  <span className="author-company">Siemens</span>
+                </div>
+                <img src={siemens} alt="Siemens" className="author-logo" />
+              </div>
+            </div>
+
+            <div className="testimonial-card testimonial-left">
+              <p className="testimonial-text">
+                Munira and I worked on the same team on a project for a few months. Her design thinking and creative approach always impressed me. She truly understands users and has a talent for creating interfaces that are both beautiful and functional.
+              </p>
+              <div className="testimonial-author">
+                <div className="author-info">
+                  <span className="author-name">Adelya Musaeva</span>
+                  <span className="author-company">BOSCH</span>
+                </div>
+                <img src={bosch} alt="Bosch" className="author-logo" />
+              </div>
+            </div>
+
+            <div className="testimonial-card testimonial-right">
+              <p className="testimonial-text">
+                Munira is incredibly detail-oriented and responsive. I worked with her in a team, and I can confidently say she never compromises on quality - she delivers polished designs on time, every time. Her ability to balance user needs with business goals makes her an exceptional designer.
+              </p>
+              <div className="testimonial-author">
+                <div className="author-info">
+                  <span className="author-name">Azilia Adylgazieva</span>
+                  <span className="author-company">Deutsche Telekom</span>
+                </div>
+                <img src={dtelekom} alt="Deutsche Telekom" className="author-logo" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="toolkit-section">
+        <h2 className="toolkit-title">My Design Toolkit</h2>
+
+        <div className="toolkit-carousel">
+          <div className="toolkit-track">
+            <img src={figmaLogo} alt="Figma" />
+            <img src={afterEffectsLogo} alt="Sketch" />
+            <img src={premiereProLogo} alt="Framer" />
+            <img src={illustratorLogo} alt="Illustrator" />
+            <img src={photoshopLogo} alt="Photoshop" />
+            <img src={notionLogo} alt="Notion" />
+
+            <img src={figmaLogo} alt="Figma" />
+            <img src={afterEffectsLogo} alt="Sketch" />
+            <img src={premiereProLogo} alt="Framer" />
+            <img src={illustratorLogo} alt="Illustrator" />
+            <img src={photoshopLogo} alt="Photoshop" />
+            <img src={notionLogo} alt="Notion" />
+
+            <img src={figmaLogo} alt="Figma" />
+            <img src={afterEffectsLogo} alt="Sketch" />
+            <img src={premiereProLogo} alt="Framer" />
+            <img src={illustratorLogo} alt="Illustrator" />
+            <img src={photoshopLogo} alt="Photoshop" />
+            <img src={notionLogo} alt="Notion" />
+          </div>
+        </div>
+      </section>
+
+      <section id="playground" className="playground-section">
+        <div className="playground-container">
+          <p className="playground-subtitle">(My Design Philosophy)</p>
+          
+          <div className="playground-text-wrapper">
+            <div className="playground-text-left">
+              <h2>Crafting digital</h2>
+              <h2 className="text-italic">that truly</h2>
+            </div>
+            <div className="playground-text-right">
+              <h2>experiences</h2>
+              <h2>delight</h2>
+            </div>
+          </div>
+
+          <div className="playground-cards">
+            <div className="playground-card">
+              <div className="card-header">
+                <h3>UX Research</h3>
+                <div className="card-dots">
+                  <span className="dot active"></span>
+                  <span className="dot"></span>
+                  <span className="dot"></span>
+                </div>
+              </div>
+              <div className="card-image">
+                <img src="https://framerusercontent.com/images/9pSg9VbHyOzgvjgKg8ZxafAC9Y.svg?width=157&height=192" alt="Compass" className="compass-base" />
+                <img src="https://framerusercontent.com/images/ux3d5Re26BvQ1hMY6HFoUzaWtHA.svg?width=18&height=100" alt="Arrow" className="compass-arrow" />
+              </div>
+              <p className="card-description">
+                Research is my compass — understanding users deeply to design experiences that truly resonate and solve real problems.
+              </p>
+            </div>
+
+            <div className="playground-card">
+              <div className="card-header">
+                <h3>Visual Design<br />& Branding</h3>
+                <div className="card-dots">
+                  <span className="dot active"></span>
+                  <span className="dot active"></span>
+                  <span className="dot"></span>
+                </div>
+              </div>
+              <div className="card-image">
+                <img src="https://framerusercontent.com/images/FKdtn2NzI19PvdqikGNTBvGO8M.svg?width=218&height=164" alt="Palette" className="palette-base" />
+                <img src="https://framerusercontent.com/images/nJnhkgaAyHW1ZSoDX71zT6bWucA.svg?width=30&height=44" alt="Brush" className="palette-brush" />
+              </div>
+              <p className="card-description">
+                Visual design is where aesthetics meet function — creating interfaces that are not just beautiful, but purposeful and memorable.
+              </p>
+            </div>
+
+            <div className="playground-card">
+              <div className="card-header">
+                <h3>Interaction Design</h3>
+                <div className="card-dots">
+                  <span className="dot active"></span>
+                  <span className="dot active"></span>
+                  <span className="dot active"></span>
+                </div>
+              </div>
+              <div className="card-image">
+                <img src="https://framerusercontent.com/images/qijKgqD5sm0TZqlD52en6tHZeQ.svg?width=171&height=207" alt="Stars" className="rocket-stars" />
+                <img src="https://framerusercontent.com/images/Q7x7MuONdp0b9SNGrEqqnmMw.svg?width=171&height=207" alt="Rocket" className="rocket-ship" />
+              </div>
+              <p className="card-description">
+                Interaction design is my rocket — crafting seamless micro-interactions and flows that make every touchpoint feel intuitive and delightful.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="potential" className="potential-section">
+        <div className="potential-dots"></div>
+        <div className="potential-overlay"></div>
+
+        <div className="potential-container">
+          <h2 className="potential-title">DESIGNING WITH PURPOSE</h2>
+
+          <div className="speedometer-wrapper">
+            <div className="speedometer">
+              <div className="speedometer-circle"></div>
+              <div className="speedometer-pin"></div>
+
+              <div className="speedometer-lines">
+                {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle) => (
+                  <div
+                    key={`main-${angle}`}
+                    className="line-main"
+                    style={{ transform: `translate(-50%, -50%) rotate(${angle}deg)` }}
+                  />
+                ))}
+
+                {Array.from({ length: 72 }, (_, i) => i * 5).filter(angle => angle % 30 !== 0).map((angle) => (
+                  <div
+                    key={`secondary-${angle}`}
+                    className="line-secondary"
+                    style={{ transform: `translate(-50%, -50%) rotate(${angle}deg)` }}
+                  />
+                ))}
+              </div>
+
+              <div className="potential-description">
+                <p>Driven by empathy and curiosity, I'm constantly evolving toward better solutions, clearer insights, and more meaningful user experiences.</p>
+                <p>The design journey never ends.</p>
+              </div>
+
+              <a href="https://drive.google.com/file/d/1td_YyfRl3Y6cdvMUpnb615qxn7nzuTQc/view?usp=sharing"
+                className="resume-button"
+                target="_blank"
+                rel="noopener">
+                <div className="resume-text">
+                  <p>Resume</p>
+                </div>
+                <div className="arrow-container">
+                  <div className="arrow-circle arrow-1">
+                    <svg viewBox="0 0 256 256" fill="currentColor">
+                      <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z" />
+                    </svg>
+                  </div>
+                  <div className="arrow-circle arrow-2">
+                    <svg viewBox="0 0 256 256" fill="currentColor">
+                      <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="contact-wrapper">
+        <a href="mailto:satanovamunira04@gmail.com" className="contact-cta">
+          <div className="contact-bg base" />
+          <div className="contact-bg hover" />
+
+          <h1 className="contact-title">
+            LET&apos;S COOK SOME CONVERSATION
+          </h1>
+
+          <div className="contact-arrows-overlay">
+            <div className="contact-arrows-track">
+              <div className="arrows-group">
+                {[...Array(15)].map((_, i) => (
+                  <svg
+                    key={`arrow-1-${i}`}
+                    className="contact-arrow"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                ))}
+              </div>
+              <div className="arrows-group">
+                {[...Array(15)].map((_, i) => (
+                  <svg
+                    key={`arrow-2-${i}`}
+                    className="contact-arrow"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                ))}
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <footer id="footer" className="footer">
+        <div className="footer-top-bar">
+          <div className="footer-top-bar-content">
+            <div className="footer-top-bar-group">
+              <span className="footer-top-bar-text">
+                {time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+              </span>
+              <span className="footer-top-bar-text">
+                {time.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+              </span>
+            </div>
+            <div className="footer-top-bar-group">
+              <span className="footer-top-bar-text">Germany</span>
+            </div>
+            <div className="footer-top-bar-group footer-status">
+              <div className="status-dot"></div>
+              <span className="footer-top-bar-text">Open to UX/UI Design Opportunities</span>
+            </div>
+            <div className="footer-top-bar-group">
+              <div className="profile-container">
+                <div className="profile-bars">
+                  <div className="bar bar1"></div>
+                  <div className="bar bar2"></div>
+                  <div className="bar bar3"></div>
+                  <div className="bar bar4"></div>
+                </div>
+                <div className="profile-image">
+                  <img src={muniraPhoto} alt="Munira" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="footer-content">
+          <div className="footer-column">
+            <h4 className="footer-heading">CONTACT ME</h4>
+            <a href="mailto:satanovamunira04@gmail.com" className="footer-link">
+              satanovamunira04@gmail.com
+            </a>
+          </div>
+
+          <div className="footer-column">
+            <h4 className="footer-heading">MENU</h4>
+            <nav className="footer-nav">
+              <a href="#home" className="footer-link">Home</a>
+              <a href="#about" className="footer-link">About</a>
+              <a href="#projects" className="footer-link">Projects</a>
+              <a href="https://drive.google.com/file/d/1td_YyfRl3Y6cdvMUpnb615qxn7nzuTQc/view?usp=sharing" target="_blank" rel="noopener" className="footer-link">Resume</a>
+            </nav>
+          </div>
+
+          <div className="footer-column">
+            <h4 className="footer-heading">SOCIAL MEDIA</h4>
+            <nav className="footer-nav">
+              <a href="https://www.linkedin.com/in/munira-satanova-b2004ilc/" target="_blank" rel="noopener" className="footer-link">LinkedIn</a>
+              <a href="https://www.instagram.com/abrokadavr?igsh=MWl5MXQyZHRva2s2NA==" target="_blank" rel="noopener" className="footer-link">Instagram</a>
+            </nav>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <p className="footer-copyright">©2026</p>
+          <p className="footer-made">Made with love, peer pressure & red eyes.</p>
+        </div>
+      </footer>
+
+      <div className="cursor-follower"></div>
+    </div>
+  );
+}
