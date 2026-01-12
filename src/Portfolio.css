@@ -1449,9 +1449,13 @@ body {
 }
 
 @media (max-width: 768px) {
+    .section {
+        padding: 4rem 0;
+    }
     .projects-header {
         grid-template-columns: var(--grid-line-1) 1fr var(--grid-line-1);
         padding: 0;
+        margin-bottom: 2rem;
     }
 
     .projects-header-left,
@@ -1462,6 +1466,7 @@ body {
 
     .projects-header-right {
         padding-bottom: 0;
+        padding-top: 1rem;
     }
 
     .projects-description {
@@ -1774,6 +1779,10 @@ body {
 @media (max-width: 768px) {
     .about-stats {
         grid-template-columns: 1fr;
+    }
+    .about-description{
+        margin-bottom: 0;
+        font-size: 0.95rem;
     }
 }
 
