@@ -353,11 +353,11 @@ export default function Portfolio() {
             </span>
           </div>
           <div className="top-bar-group">
-            <span className="top-bar-text">Kyrgyz Republic</span>
+            <span className="top-bar-text">Germany</span>
           </div>
           <div className="top-bar-group top-bar-status">
             <div className="status-dot"></div>
-            <span className="top-bar-text">Looking for Werkstudent internship</span>
+            <span className="top-bar-text">Looking for a Werkstudent Position</span>
           </div>
           <div className="top-bar-group">
             <div className="profile-container">
@@ -874,7 +874,7 @@ export default function Portfolio() {
               </span>
             </div>
             <div className="footer-top-bar-group">
-              <span className="footer-top-bar-text">Kyrgyz Republic</span>
+              <span className="footer-top-bar-text">Germany</span>
             </div>
             <div className="footer-top-bar-group footer-status">
               <div className="status-dot"></div>

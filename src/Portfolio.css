@@ -523,6 +523,43 @@ body {
     }
 }
 
+@media (max-width: 768px) {
+    .top-bar {
+        top: 80px;
+        position: relative; /* 🔥 вместо absolute */
+    }
+
+    .top-bar-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 2rem 5%;
+    }
+
+    .top-bar-group:nth-child(1),
+    .top-bar-group:nth-child(2),
+    .top-bar-group:nth-child(3),
+    .top-bar-group:nth-child(4) {
+        grid-column: 1;
+        justify-self: center;
+        padding: 0;
+    }
+
+    .top-bar-group:nth-child(1) {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .profile-container {
+        width: 60px;
+        height: 60px;
+    }
+
+    .profile-image {
+        width: 60px;
+        height: 60px;
+    }
+}
+
 .section {
     padding: 8rem 0;
     /* сверху и снизу, НЕ по бокам */
