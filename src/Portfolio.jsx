@@ -24,14 +24,11 @@ export default function Portfolio() {
 
   useEffect(() => {
     const track = document.querySelector('.toolkit-track');
-    const firstSet = track.children.length / 3; // количество иконок в одном наборе
-
-    // Вычисляем ширину одного набора
+    const firstSet = track.children.length / 3;
     let setWidth = 0;
     for (let i = 0; i < firstSet; i++) {
-      setWidth += track.children[i].offsetWidth + 61; // ширина + gap
+      setWidth += track.children[i].offsetWidth + 61;
     }
-
     track.style.setProperty('--scroll-distance', `-${setWidth}px`);
   }, []);
 
@@ -43,85 +40,69 @@ export default function Portfolio() {
 
       if (!section || !circle || !pin) return;
 
-      // Получаем позицию секции
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
       const scrollY = window.scrollY;
-
-      // Вычисляем прогресс скролла внутри секции (0 до 1)
       const scrollProgress = (scrollY - sectionTop) / (sectionHeight / 2);
       const progress = Math.min(Math.max(scrollProgress, 0), 1);
-
       const startAngle = 0;
       const endAngle = 90;
       const currentAngle = startAngle + (progress * (endAngle - startAngle));
 
-      // Применяем вращение
       circle.style.transform = `translate(-50%, -50%) rotate(${currentAngle}deg)`;
       pin.style.transform = `translate(-50%, -100%) rotate(${currentAngle}deg)`;
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // вызываем сразу
+    handleScroll();
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-// Playground scroll animations
-useEffect(() => {
+
+  useEffect(() => {
     const textWrapper = document.querySelector('.playground-text-wrapper');
     const textLeft = document.querySelector('.playground-text-left');
     const textRight = document.querySelector('.playground-text-right');
     const cards = document.querySelectorAll('.playground-card');
 
-    // 🔥 Плавное раздвигание текста при скролле
     const handleScroll = () => {
-        const scrollY = window.scrollY;
-        const playgroundSection = document.getElementById('playground');
-        if (!playgroundSection || !textWrapper) return;
+      const scrollY = window.scrollY;
+      const playgroundSection = document.getElementById('playground');
+      if (!playgroundSection || !textWrapper) return;
 
-        const sectionTop = playgroundSection.offsetTop;
-        const scrollProgress = scrollY - sectionTop;
-
-        // 🔥 Проверка размера экрана
-        const isMobile = window.innerWidth <= 768;
-        
-        // 🔥 На мобильных анимация отключена
-        if (isMobile) {
-            if (textLeft && textRight) {
-                textLeft.style.transform = 'translateX(0)';
-                textRight.style.transform = 'translateX(0)';
-            }
-            return;
-        }
-        
-        // Только для десктопа
-        const maxScroll = 500;
-        const maxGap = 16;
-        
-        const progress = Math.min(Math.max(scrollProgress / maxScroll, 0), 1);
-        const currentGap = progress * maxGap;
-
-        // Применяем трансформацию
+      const sectionTop = playgroundSection.offsetTop;
+      const scrollProgress = scrollY - sectionTop;
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
         if (textLeft && textRight) {
-            textLeft.style.transform = `translateX(-${currentGap}vw)`;
-            textRight.style.transform = `translateX(${currentGap}vw)`;
+          textLeft.style.transform = 'translateX(0)';
+          textRight.style.transform = 'translateX(0)';
         }
+        return;
+      }
+      
+      const maxScroll = 500;
+      const maxGap = 16;
+      const progress = Math.min(Math.max(scrollProgress / maxScroll, 0), 1);
+      const currentGap = progress * maxGap;
+
+      if (textLeft && textRight) {
+        textLeft.style.transform = `translateX(-${currentGap}vw)`;
+        textRight.style.transform = `translateX(${currentGap}vw)`;
+      }
     };
 
-    // 🔥 Observer для карточек - проверяем мобильную версию
     const isMobile = window.innerWidth <= 768;
-    
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
     }, {
-        threshold: isMobile ? 0.1 : 0.3,
-        rootMargin: isMobile ? '0px' : '-100px'
+      threshold: isMobile ? 0.1 : 0.3,
+      rootMargin: isMobile ? '0px' : '-100px'
     });
 
     cards.forEach(card => observer.observe(card));
@@ -129,38 +110,32 @@ useEffect(() => {
     handleScroll();
 
     return () => {
-        observer.disconnect();
-        window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
     };
-}, []);
+  }, []);
 
-// 🔥 Анимация появления project cards на мобильных
-useEffect(() => {
+  useEffect(() => {
     const isMobile = window.innerWidth <= 768;
     
     if (isMobile) {
-        const projectCards = document.querySelectorAll('.project-card');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px'
+      const projectCards = document.querySelectorAll('.project-card');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
         });
-        
-        projectCards.forEach(card => observer.observe(card));
-        
-        return () => observer.disconnect();
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px'
+      });
+      
+      projectCards.forEach(card => observer.observe(card));
+      return () => observer.disconnect();
     }
-}, []);
+  }, []);
 
-   
-
-  // Testimonials scroll animation
   useEffect(() => {
     const observerOptions = {
       threshold: 0.2,
@@ -181,8 +156,7 @@ useEffect(() => {
     return () => observer.disconnect();
   }, []);
 
-// Анимация счётчика статистики при скролле
-useEffect(() => {
+  useEffect(() => {
     const animateValue = (valueElement, start, end, duration) => {
       let startTimestamp = null;
       const step = (timestamp) => {
@@ -207,11 +181,9 @@ useEffect(() => {
     };
 
     const isMobile = window.innerWidth <= 768;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // 🔥 Ищем stat-item напрямую, а не через entry.target
           const statItems = document.querySelectorAll('.stat-item');
 
           if (entry.isIntersecting) {
@@ -245,8 +217,8 @@ useEffect(() => {
         });
       },
       { 
-        threshold: isMobile ? 0.2 : 0.3, // 🔥 снизил порог
-        rootMargin: '0px' // 🔥 убрал rootMargin
+        threshold: isMobile ? 0.2 : 0.3,
+        rootMargin: '0px'
       }
     );
 
@@ -258,22 +230,19 @@ useEffect(() => {
 
   useEffect(() => {
     if (menuOpen) {
-      // 🔥 Когда меню открывается
       setTimeout(() => {
         document.getElementById('footer')?.scrollIntoView({
-          behavior: 'auto', // мгновенный скролл
+          behavior: 'auto',
           block: 'start'
         });
-      }, 600); // после анимации overlay
+      }, 600);
     } else {
-      // 🔥 Когда меню закрывается
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: 'auto' });
       }, 600);
     }
   }, [menuOpen]);
 
-  // 🔥 Lenis smooth scroll + blur эффект (ОБЪЕДИНЕНО)
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.0,
@@ -282,11 +251,9 @@ useEffect(() => {
       smoothTouch: false
     });
 
-    // Обработчик скролла для blur и секций
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const maxScroll = 200;
-
       const blurAmount = Math.min(scrollY / maxScroll * 20, 20);
       const bgOpacity = Math.min(scrollY / maxScroll * 0.8, 0.8);
 
@@ -306,7 +273,6 @@ useEffect(() => {
       if (current) setActiveSection(current);
     };
 
-    // 🔥 Lenis интегрируется с handleScroll
     lenis.on('scroll', handleScroll);
 
     function raf(time) {
@@ -318,7 +284,6 @@ useEffect(() => {
     return () => lenis.destroy();
   }, []);
 
-  // Часы
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(interval);
@@ -326,25 +291,19 @@ useEffect(() => {
 
   useEffect(() => {
     const follower = document.querySelector('.cursor-follower');
-
     let mouseX = 0;
     let mouseY = 0;
     let currentX = 0;
     let currentY = 0;
-
-    const offsetX = 14; // вправо
-    const offsetY = 14; // вниз
-    const speed = 0.2; // плавность (меньше = медленнее)
+    const offsetX = 14;
+    const offsetY = 14;
+    const speed = 0.2;
 
     const move = () => {
       currentX += (mouseX - currentX) * speed;
       currentY += (mouseY - currentY) * speed;
 
-      follower.style.transform = `translate(
-      ${currentX + offsetX}px,
-      ${currentY + offsetY}px
-    )`;
-
+      follower.style.transform = `translate(${currentX + offsetX}px, ${currentY + offsetY}px)`;
       requestAnimationFrame(move);
     };
 
@@ -356,11 +315,8 @@ useEffect(() => {
     window.addEventListener('mousemove', onMouseMove);
     move();
 
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-    };
+    return () => window.removeEventListener('mousemove', onMouseMove);
   }, []);
-
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -372,10 +328,8 @@ useEffect(() => {
       <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
         <div className="nav-content">
           <div className="logo" onClick={() => scrollToSection('home')}>MUNIRA</div>
-
         </div>
       </nav>
-
 
       <div className="top-bar">
         <div className="top-bar-content">
@@ -429,7 +383,6 @@ useEffect(() => {
 
       <section id="projects" className="section">
         <div className="section-container">
-          {/* 🔥 НОВЫЙ ЗАГОЛОВОК */}
           <div className="projects-header">
             <div className="projects-header-left">
               <div className="projects-span-container">
@@ -513,7 +466,6 @@ useEffect(() => {
                 <div className="project-content">
                   <h3 className="project-title">{project.title}</h3>
                   <p className="project-description">{project.desc}</p>
-
                 </div>
               </div>
             ))}
@@ -523,7 +475,6 @@ useEffect(() => {
 
       <section id="about" className="section">
         <div className="section-container">
-          {/* ТОЛЬКО ЗАГОЛОВОК */}
           <div className="about-header">
             <div className="about-header-left">
               <div className="about-span-container">
@@ -550,27 +501,24 @@ useEffect(() => {
             </div>
           </div>
 
-          {/* КОНТЕНТ ОТДЕЛЬНО */}
           <div className="about-content-wrapper">
             <div className="about-text-column">
               <p className="about-text">
-                Hey, I’m Munira. I’m someone who finds satisfaction in{" "}
+                Hey, I'm Munira. I'm someone who finds satisfaction in{" "}
                 <span style={{ color: "#000" }}>things being finished</span> — not rushed, not abandoned halfway, but calmly brought to a point where they finally feel complete.
               </p>
 
               <p className="about-text">
                 I tend to notice{" "}
-                <span style={{ color: "#000" }}>details others overlook</span>. When something is almost right, I feel it immediately — and I can’t leave it there. A small adjustment, another pass, a quiet refinement, until everything{" "}
+                <span style={{ color: "#000" }}>details others overlook</span>. When something is almost right, I feel it immediately — and I can't leave it there. A small adjustment, another pass, a quiet refinement, until everything{" "}
                 <span style={{ color: "#000" }}>settles into place</span>.
               </p>
 
               <p className="about-text">
-                When I’m not focused on a task, I usually slow things down:{" "}
+                When I'm not focused on a task, I usually slow things down:{" "}
                 <span style={{ color: "#000" }}>a cup of cappuccino</span>, good music, observing how things connect — visually, structurally, intuitively. I care about{" "}
                 <span style={{ color: "#000" }}>harmony, character, and intention</span>.
               </p>
-
-
             </div>
 
             <div className="stat-item">
@@ -588,7 +536,6 @@ useEffect(() => {
               <div className="stat-value">100<span className="stat-unit">%</span></div>
             </div>
 
-
             <div className="about-image-column">
               <img src={munira2} alt="Munira Satanova" />
             </div>
@@ -597,7 +544,6 @@ useEffect(() => {
       </section>
 
       <section id="testimonials" className="testimonials-section">
-        {/* Заголовок */}
         <div className="testimonials-header">
           <span className="testimonials-header-slash">//</span>
           <h2 className="testimonials-header-title">TESTIMONIALS</h2>
@@ -606,7 +552,6 @@ useEffect(() => {
         <p className="testimonials-subtitle">(© all bragging rights reserved by me)</p>
 
         <div className="testimonials-container">
-          {/* 🔥 Sticky круг - остаётся в центре */}
           <div className="testimonials-circle-wrapper">
             <div className="testimonials-circle">
               <svg className="rotating-text" viewBox="0 0 200 200">
@@ -628,7 +573,6 @@ useEffect(() => {
             </div>
           </div>
 
-          {/* Testimonials - скроллятся под кругом */}
           <div className="testimonials-content">
             <div className="testimonial-card testimonial-right">
               <p className="testimonial-text">
@@ -658,7 +602,8 @@ useEffect(() => {
 
             <div className="testimonial-card testimonial-right">
               <p className="testimonial-text">
-                Munira is quick to learn and incredibly responsive. I worked with her in a team, and I can confidently say she never lets anyone down - she delivers on time, every time. Communicating and collaborating with her is easy, and she brings both skill and reliability to any project. </p>
+                Munira is quick to learn and incredibly responsive. I worked with her in a team, and I can confidently say she never lets anyone down - she delivers on time, every time. Communicating and collaborating with her is easy, and she brings both skill and reliability to any project.
+              </p>
               <div className="testimonial-author">
                 <div className="author-info">
                   <span className="author-name">Azilia Adylgazieva</span>
@@ -676,7 +621,6 @@ useEffect(() => {
 
         <div className="toolkit-carousel">
           <div className="toolkit-track">
-            {/* Копия 1 */}
             <img src={reactLogo} alt="React" />
             <img src={tsLogo} alt="TypeScript" />
             <img src={jsLogo} alt="JavaScript" />
@@ -686,7 +630,6 @@ useEffect(() => {
             <img src={springLogo} alt="Spring Boot" />
             <img src={dockerLogo} alt="Docker" />
 
-            {/* Копия 2 */}
             <img src={reactLogo} alt="React" />
             <img src={tsLogo} alt="TypeScript" />
             <img src={jsLogo} alt="JavaScript" />
@@ -696,7 +639,6 @@ useEffect(() => {
             <img src={springLogo} alt="Spring Boot" />
             <img src={dockerLogo} alt="Docker" />
 
-            {/* Копия 3 🔥 */}
             <img src={reactLogo} alt="React" />
             <img src={tsLogo} alt="TypeScript" />
             <img src={jsLogo} alt="JavaScript" />
@@ -712,7 +654,7 @@ useEffect(() => {
       <section id="playground" className="playground-section">
         <div className="playground-container">
           <p className="playground-subtitle">(My Playground)</p>
-          {/* Раздвигающийся текст */}
+          
           <div className="playground-text-wrapper">
             <div className="playground-text-left">
               <h2>Crafting digital</h2>
@@ -724,7 +666,6 @@ useEffect(() => {
             </div>
           </div>
 
-          {/* Карточки */}
           <div className="playground-cards">
             <div className="playground-card">
               <div className="card-header">
@@ -792,13 +733,9 @@ useEffect(() => {
 
           <div className="speedometer-wrapper">
             <div className="speedometer">
-              {/* Градиентный круг */}
               <div className="speedometer-circle"></div>
-
-              {/* Стрелка */}
               <div className="speedometer-pin"></div>
 
-              {/* Деления */}
               <div className="speedometer-lines">
                 {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle) => (
                   <div
@@ -817,13 +754,11 @@ useEffect(() => {
                 ))}
               </div>
 
-              {/* 🔥 Текст внутри спидометра */}
               <div className="potential-description">
                 <p>Fueled by curiosity, I'm always accelerating toward better ideas, sharper designs, and deeper understanding.</p>
                 <p>The gauge never stays still.</p>
               </div>
 
-              {/* 🔥 Кнопка внутри спидометра */}
               <a href="https://drive.google.com/file/d/1Iwyl1CZlGXNkwSbFV7j6YMr2ZECAdHho/view?usp=sharing"
                 className="resume-button"
                 target="_blank"
@@ -851,16 +786,13 @@ useEffect(() => {
 
       <div className="contact-wrapper">
         <a href="mailto:satanovamunira04@gmail.com" className="contact-cta">
-          {/* backgrounds */}
           <div className="contact-bg base" />
           <div className="contact-bg hover" />
 
-          {/* title */}
           <h1 className="contact-title">
             LET&apos;S COOK UP SOME CONVERSATION
           </h1>
 
-          {/* arrows overlay */}
           <div className="contact-arrows-overlay">
             <div className="contact-arrows-track">
               <div className="arrows-group">
@@ -897,7 +829,6 @@ useEffect(() => {
       </div>
 
       <footer id="footer" className="footer">
-        {/* Top bar */}
         <div className="footer-top-bar">
           <div className="footer-top-bar-content">
             <div className="footer-top-bar-group">
@@ -931,7 +862,6 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* Footer content - 4 колонки между 2-й и 5-й линией */}
         <div className="footer-content">
           <div className="footer-column">
             <h4 className="footer-heading">CONTACT ME</h4>
@@ -959,13 +889,11 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* Copyright */}
         <div className="footer-bottom">
           <p className="footer-copyright">©2026</p>
           <p className="footer-made">Made with love, peer pressure & red eyes.</p>
         </div>
       </footer>
-
 
       <div className="cursor-follower"></div>
     </div>
